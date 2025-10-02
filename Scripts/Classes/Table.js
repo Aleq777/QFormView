@@ -147,9 +147,9 @@ class Table
         let groupCreated = false;
         let group;
 
-        this.Columns.forEach((column, index) => {
+        this.Columns.forEach(column => {
 
-            if (column.Type !== "Group")
+            if (!(column instanceof Group))
                 return;
 
             if (!groupCreated)
@@ -198,8 +198,6 @@ class Table
             let tr = Create("tr");
 
             this.SerializedColumns.forEach(column => {
-                // log(column instanceof ColumnCounter);
-                // log(column instanceof Group);
 
                 if (column instanceof ColumnAction)
                 {
@@ -231,7 +229,7 @@ class Table
         });
     }
 
-    static _DecodeEach(data, column, each, dataSource, index, cell)
+    static _DecodeEach(data, column, each, dataSource, index)
     {
         let content = null;
 
@@ -250,19 +248,17 @@ class Table
         // As Table
         if (each.Has("Table"))
         {
-            // log(each.FindTag("Table"));
             content = each.innerHTML.trim();
 
             decode((content, key, value) => {
                 const k = `${dataSource}[${index}].${value}`;
-                // log(k);
                 return content.replaceAll(key, k);
             });
 
             let parser = new DOMParser();
             content = parser.parseFromString(content, "application/xml");
             content = content.FindTag("Table");
-            // log(content.getElementsByTagName("Table")[0]);
+
             const table = new Table(content);
 
             let div = Create("div");

@@ -23,9 +23,7 @@ class View extends Table
         this.Title = this.XML.Attr("Title");
         
         if (this.XML.Has("Description"))
-        {
             this.Description = this.XML.FindTag("Description").innerHTML.trim();
-        }
     }
 
     Display()

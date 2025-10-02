@@ -15,7 +15,7 @@ class ColumnCustom extends Column
     {
         Column._CreateCell(tr, cell => {
             const each = this.XML.FindTag("Each");
-            cell.innerHTML = Table._DecodeEach(item, this, each, dataSource, index, cell);
+            cell.innerHTML = Table._DecodeEach(item, this, each, dataSource, index);
         });
     }
 

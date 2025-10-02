@@ -18,7 +18,7 @@ class ViewManager
     {
         const views = ViewManager.ViewsXML.GetTags("View");
 
-        views.forEach((view, index) => {
+        views.forEach(view => {
 
             let v = new View(view);
 
