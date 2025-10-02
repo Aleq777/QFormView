@@ -112,7 +112,7 @@ class Table
 
     Display(id, sourceHTML)
     {
-        this.HTML = sourceHTML.Find(id);
+        this.HTML = sourceHTML.querySelector(`#${id}`);
 
         this._CreateGroups();
 
@@ -291,20 +291,21 @@ class Table
 
             decode((content, key, value) => {
                 const k = `${dataSource}[${index}].${value}`;
-                log(k);
+                // log(k);
                 return content.replaceAll(key, k);
             });
 
             let parser = new DOMParser();
             content = parser.parseFromString(content, "application/xml");
             content = content.FindTag("Table");
-            log(content.getElementsByTagName("Table")[0]);
+            // log(content.getElementsByTagName("Table")[0]);
             const table = new Table(content);
 
             let div = Create("div");
             let id = `ViewTable${Table.GlobalCellID++}`;
             div.innerHTML = `<table id="${id}"></table>`
             table.Display(id, div);
+            return div.innerHTML;
         }
         // As HTML
         else
