@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script type="text/javascript" src="./data.js"></script>
+
+    <script type="text/javascript" src="./Scripts/base.js"></script>
+
+    <script type="text/javascript" src="./Scripts/Classes/Action.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Column.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Group.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Table.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/View.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/ViewManager.js"></script>
+
+    <script type="text/javascript" src="./Scripts/main.js"></script>
+
+    <script id="views" type="application/xml">
+        
+
+    <Views>
+        <View Name="users" Title="Użytkownicy" Type="Horizontal">
+            <Description>
+                Przykładowa tabela z użytkownikami.
+            </Description>
+            <Data>
+                <Source>data.users</Source>
+                <!-- <Source Alias="vehicle">data.vehicles</Source> -->
+            </Data>
+            <Group Title="Grupa">
+                <Column Type="Counter" StartFrom="1">
+                    <Title>lp.</Title>
+                </Column>
+                <Column Type="Active">
+                    <Title>X</Title>
+                </Column>
+            </Group>
+            <Column Type="Field" Key="identifier">
+                
+            </Column>
+            <Column Type="Custom">
+                <Title>Imię i nazwisko</Title>
+                <!-- HardSpaces = false (domyślnie) powoduje ignorowanie spacji jeśli są -->
+                <Each Using="$ = firstname, @ = lastname" HardSpaces="false">
+                    $ @
+                </Each>
+            </Column>
+            <Column Type="Custom">
+                <Title>Ekwipunek</Title>
+                <Each Using="$=inventory">
+                    <Table>
+                        <Data>
+                            <Source>$</Source>
+                        </Data>
+                        <Column Type="Field" Key="label">
+                            <Title>Przedmiot</Title>
+                        </Column>
+                        <Column Type="Field" Key="count">
+                            <Title>Ilość</Title>
+                        </Column>
+                    </Table>
+                </Each>
+            </Column>
+            <Column Type="Action">
+                <Title>Akcje</Title>
+                <Button Action="console.log">Edytuj</Button>
+                <Button Action="console.log">Usuń</Button>
+            </Column>
+        </View>
+    </Views>
+
+
+
+
+    </script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body onload="LoadQFormView();">
+    <div id="users"></div>
+</body>
+</html>

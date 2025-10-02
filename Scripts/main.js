@@ -1,0 +1,6 @@
+
+
+function LoadQFormView()
+{
+    ViewManager.Start();
+}
