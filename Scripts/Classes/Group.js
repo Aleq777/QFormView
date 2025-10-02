@@ -16,7 +16,8 @@ class Group extends Column
     _SetInnerColumns(xml)
     {
         xml.forEach((column, index) => {
-            let col = new Column(column);
+            let col = Table.NewColumn(column);
+            // let col = new Column(column);
             this.InnerColumns.push(col);
         });
     }

@@ -9,7 +9,14 @@
     <script type="text/javascript" src="./Scripts/base.js"></script>
 
     <script type="text/javascript" src="./Scripts/Classes/Action.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/Column.js"></script>
+
+    <script type="text/javascript" src="./Scripts/Classes/Columns/Column.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnAction.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnActive.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnCounter.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnCustom.js"></script>
+    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnField.js"></script>
+
     <script type="text/javascript" src="./Scripts/Classes/Group.js"></script>
     <script type="text/javascript" src="./Scripts/Classes/Table.js"></script>
     <script type="text/javascript" src="./Scripts/Classes/View.js"></script>
@@ -19,6 +26,7 @@
 
     <script id="views" type="application/xml">
         
+    
 
     <Views>
         <View Name="users" Title="Użytkownicy" Type="Horizontal">
@@ -37,7 +45,7 @@
                     <Title>X</Title>
                 </Column>
             </Group>
-            <Column Type="Field" Key="identifier">
+            <Column Key="identifier">
                 
             </Column>
             <Column Type="Custom">
@@ -83,6 +91,7 @@
     </style>
 </head>
 <body onload="LoadQFormView();">
+    <div id="creator"></div>
     <div id="users"></div>
 </body>
 </html>

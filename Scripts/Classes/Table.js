@@ -82,7 +82,7 @@ class Table
             switch (element.tagName)
             {
                 case "Column":
-                    column = new Column(element);
+                    column = Table.NewColumn(element);
                     break;
                 case "Group":
                     column = new Group(element);
@@ -98,12 +98,33 @@ class Table
         this._SerializeColumns(this.Columns);
     }
 
+    static NewColumn(column)
+    {
+        let type = column.Attr("Type") ?? EnumColumnTypes.Field;
+
+        switch (type)
+        {
+            case EnumColumnTypes.Counter:
+                return new ColumnCounter(column);
+            case EnumColumnTypes.Active:
+                return new ColumnActive(column);
+            case EnumColumnTypes.Field:
+                return new ColumnField(column);
+            case EnumColumnTypes.Action:
+                return new ColumnAction(column);
+            case EnumColumnTypes.Custom:
+                return new ColumnCustom(column);
+            default:
+                return null;
+        }
+    }
+
     _SerializeColumns(columnList)
     {
         this.SerializedColumns = [];
 
         columnList.forEach(column => {
-            if (column.Type === "Group")
+            if (column instanceof Group)
                 this._SerializeColumns(column.InnerColumns);
             else
                 this.SerializedColumns.push(column);
@@ -176,94 +197,37 @@ class Table
         data.forEach((item, index) => {
             let tr = Create("tr");
 
-            this.SerializedColumns.forEach((column, columnIndex) => {
-                switch (column.Type)
+            this.SerializedColumns.forEach(column => {
+                // log(column instanceof ColumnCounter);
+                // log(column instanceof Group);
+
+                if (column instanceof ColumnAction)
                 {
-                    case EnumColumnTypes.Counter:
-                        Table._CreateCellCounter(tr, column, index);
-                        break;
-                    case EnumColumnTypes.Active:
-                        Table._CreateCellActive(tr, item, index);
-                        break;
-                    case EnumColumnTypes.Field:
-                        Table._CreateCellField(tr, item, column);
-                        break;
-                    case EnumColumnTypes.Action:
-                        Table._CreateCellAction(tr, column, index, item);
-                        break;
-                    case EnumColumnTypes.Custom:
-                        Table._CreateCellCustom(tr, column, item, this.RawDataSources.Main, index);
-                        break;
-                    default:
-                        break;
+                    column.CreateCell(tr, index, item)
+                }
+                else if (column instanceof ColumnActive)
+                {
+                    column.CreateCell(tr, item, index)
+                }
+                else if (column instanceof ColumnCounter)
+                {
+                    column.CreateCell(tr, index)
+                }
+                else if (column instanceof ColumnCustom)
+                {
+                    column.CreateCell(tr, item, this.RawDataSources.Main, index)
+                }
+                else if (column instanceof ColumnField)
+                {
+                    column.CreateCell(tr, item);
+                }
+                else
+                {
+
                 }
             });
 
             table.appendChild(tr);
-        });
-    }
-
-    static _CreateCell(tr, func)
-    {
-        let cell = Create("td");
-        func(cell);
-        tr.appendChild(cell);
-    }
-
-    static _CreateCellCounter(tr, column, index)
-    {
-        Table._CreateCell(tr, cell => {
-            cell.innerText = index + column.StartFrom;
-        });
-    }
-
-    static _CreateCellActive(tr, item, index)
-    {
-        Table._CreateCell(tr, cell => {
-            let deactivator = Create("input");
-            deactivator.id = `deactivator_${index}`;
-            deactivator.type = "checkbox";
-
-            deactivator.onchange = element => {
-                item.Active = element.target.checked;
-            };
-
-            cell.appendChild(deactivator);
-
-        });
-    }
-
-    static _CreateCellField(tr, item, column)
-    {
-        Table._CreateCell(tr, cell => {
-
-            cell.innerText = item[column.Key];
-
-        });
-    }
-
-    static _CreateCellAction(tr, column, index, item)
-    {
-        Table._CreateCell(tr, cell => {
-            column.Actions.forEach(action => {
-                
-                let button = Create("button");
-                button.innerText = action.Title;
-                button.onclick = () => {
-                    action.Procedure(index, item);
-                };
-
-                cell.appendChild(button);
-
-            });
-        });
-    }
-
-    static _CreateCellCustom(tr, column, item, dataSource, index)
-    {
-        Table._CreateCell(tr, cell => {
-            const each = column.XML.FindTag("Each");
-            cell.innerHTML = Table._DecodeEach(item, column, each, dataSource, index, cell);
         });
     }
 
