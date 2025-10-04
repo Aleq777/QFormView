@@ -16,7 +16,7 @@ class ColumnActive extends Column
             deactivator.type = "checkbox";
 
             deactivator.onchange = element => {
-                item.Active = element.target.checked;
+                item.Active = !element.target.checked;
             };
 
             cell.appendChild(deactivator);

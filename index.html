@@ -8,25 +8,27 @@
 
     <script type="text/javascript" src="./Scripts/base.js"></script>
 
-    <script type="text/javascript" src="./Scripts/Classes/Action.js"></script>
+    <!-- VIEWS -->
+    <script type="text/javascript" src="./Scripts/View/Action.js"></script>
 
-    <script type="text/javascript" src="./Scripts/Classes/Columns/Column.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnAction.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnActive.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnCounter.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnCustom.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/Columns/ColumnField.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/Columns/Group.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/Column.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnAction.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnActive.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnCounter.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnCustom.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/ColumnField.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Columns/Group.js"></script>
 
-    <script type="text/javascript" src="./Scripts/Classes/Table.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/View.js"></script>
-    <script type="text/javascript" src="./Scripts/Classes/ViewManager.js"></script>
+    <script type="text/javascript" src="./Scripts/View/Table.js"></script>
+    <script type="text/javascript" src="./Scripts/View/View.js"></script>
+    <script type="text/javascript" src="./Scripts/View/ViewManager.js"></script>
 
     <script type="text/javascript" src="./Scripts/main.js"></script>
 
+    <!-- FORMS -->
+    <script type="text/javascritp" src="./Scripts/Form/FormManager.js"></script>
+
     <script id="views" type="application/xml">
-        
-    
 
     <Views>
         <View Name="users" Title="Użytkownicy" Type="Horizontal">
@@ -79,10 +81,88 @@
         </View>
     </Views>
 
-
-
-
     </script>
+
+    <script id="forms" type="application/xml">
+    <Forms>
+        <Form Name="userCrt" Title="Konfiguracja postaci" Editable>
+            <Description>
+                Skonfiguruj postać
+            </Description>
+            <Data>
+                <Source>data.newUsers</Source>
+            </Data>
+            <Questions>
+                <Question Key="Name" Type="Text" Required>
+                    <Title>Imię</Title>
+                </Question>
+                <Question Key="LastName" Type="Text" Required>
+                    <Title>Nazwisko</Title>
+                </Question>
+                <Question Key="Height" Type="Range" Min="160" Max="200">
+                    <Title>Wzrost</Title>
+                </Question>
+                <Question Key="Sex" Type="Radio" Required>
+                    <Description>Biologiczna płeć</Description>
+                    <Title>Płeć</Title>
+                    <Answers>
+                        <Answer Value="m" Default>Mężczyzna</Answer>
+                        <Answer Value="k">
+                            <div style="color:#f00;">Kobieta</div>
+                        </Answer>
+                    </Answers>
+                </Question>
+                <Question Key="Job" Type="Select" Placeholder="Aa..." Required>
+                    <Title>Praca</Title>
+                    <Answers>
+                        <Answer Value="police">Policjant</Answer>
+                        <Answer Value="mecano">Mechanik</Answer>
+                        <Answer Value="ems">Medyk</Answer>
+                    </Answers>
+                </Question>
+                <Question Key="Country" Type="Multi" Placeholder="Aa..." Required>
+                    <Title>Obywatelstwo</Title>
+                    <Answers Order="Descending">
+                        <Answer Value="pl">Polskie</Answer>
+                        <Answer Value="us">Amerykańskie</Answer>
+                        <Answer Value="fr">Francuskie</Answer>
+                        <Answer Value="en">Brytyjskie</Answer>
+                        <Answer Value="sp">Hiszpańskie</Answer>
+                        <Answer Value="ch">Chińskie</Answer>
+                    </Answers>
+                </Question>
+                <Question Key="DateOfBirth" Type="Date" Required>
+                    <Title>Data urodzenia</Title>
+                </Question>
+                <Question Key="FavColor" Type="Color" Default="#ff0000" Required>
+                    <Title>Ulubiony kolor</Title>
+                </Question>
+                <Question Key="History" Type="Textarea" MinLength="1" Required>
+                    <Title>Historia postaci</Title>
+                </Question>
+                <Question Key="Photo" Type="File">
+                    <Title>Zdjęcie</Title>
+                </Question>
+            </Questions>
+            <!-- Independent -->
+            <Matrix>
+                <Records>
+                    <Record Key=""></Record>
+                    <Record Key=""></Record>
+                    <Record Key=""></Record>
+                    <Record Key=""></Record>
+                </Records>
+            </Matrix>
+            <Actions>
+                <Button Type="Reset"></Button>
+                <Button Action="log">Sprawdź</Button>
+                <Button Type="Create">Dodaj</Button>
+            </Actions>
+        </Form>
+    </Forms>
+    </script>
+
+
     <style>
         table, th, td {
             border: 1px solid black;

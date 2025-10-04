@@ -9,7 +9,7 @@ class ViewManager
     {
         const parser = new DOMParser();
 
-        ViewManager.ViewsXML = parser.parseFromString(Find("views").innerHTML, "application/xml");
+        ViewManager.ViewsXML = parser.parseFromString( Find("views").innerHTML, "application/xml" );
 
         ViewManager.InitialiseViews();
     }
