@@ -8,6 +8,8 @@
 
     <script type="text/javascript" src="./Scripts/base.js"></script>
 
+    <script type="text/javascript" src="./Scripts/Classes/DataManipulator.js"></script>
+
     <!-- VIEWS -->
     <script type="text/javascript" src="./Scripts/View/Action.js"></script>
 
@@ -23,10 +25,12 @@
     <script type="text/javascript" src="./Scripts/View/View.js"></script>
     <script type="text/javascript" src="./Scripts/View/ViewManager.js"></script>
 
-    <script type="text/javascript" src="./Scripts/main.js"></script>
-
+    
     <!-- FORMS -->
-    <script type="text/javascritp" src="./Scripts/Form/FormManager.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Form.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/FormManager.js"></script>
+    
+    <script type="text/javascript" src="./Scripts/main.js"></script>
 
     <script id="views" type="application/xml">
 
@@ -85,7 +89,7 @@
 
     <script id="forms" type="application/xml">
     <Forms>
-        <Form Name="userCrt" Title="Konfiguracja postaci" Editable>
+        <Form Name="creator" Title="Konfiguracja postaci" Editable="true">
             <Description>
                 Skonfiguruj postać
             </Description>
@@ -93,26 +97,26 @@
                 <Source>data.newUsers</Source>
             </Data>
             <Questions>
-                <Question Key="Name" Type="Text" Required>
+                <Question Key="Name" Type="Text" Required="true">
                     <Title>Imię</Title>
                 </Question>
-                <Question Key="LastName" Type="Text" Required>
+                <Question Key="LastName" Type="Text" Required="true">
                     <Title>Nazwisko</Title>
                 </Question>
                 <Question Key="Height" Type="Range" Min="160" Max="200">
                     <Title>Wzrost</Title>
                 </Question>
-                <Question Key="Sex" Type="Radio" Required>
+                <Question Key="Sex" Type="Radio" Required="true">
                     <Description>Biologiczna płeć</Description>
                     <Title>Płeć</Title>
-                    <Answers>
-                        <Answer Value="m" Default>Mężczyzna</Answer>
+                    <Answers Default="m">
+                        <Answer Value="m">Mężczyzna</Answer>
                         <Answer Value="k">
                             <div style="color:#f00;">Kobieta</div>
                         </Answer>
                     </Answers>
                 </Question>
-                <Question Key="Job" Type="Select" Placeholder="Aa..." Required>
+                <Question Key="Job" Type="Select" Placeholder="Aa..." Required="true">
                     <Title>Praca</Title>
                     <Answers>
                         <Answer Value="police">Policjant</Answer>
@@ -120,7 +124,7 @@
                         <Answer Value="ems">Medyk</Answer>
                     </Answers>
                 </Question>
-                <Question Key="Country" Type="Multi" Placeholder="Aa..." Required>
+                <Question Key="Country" Type="Multi" Placeholder="Aa..." Required="true">
                     <Title>Obywatelstwo</Title>
                     <Answers Order="Descending">
                         <Answer Value="pl">Polskie</Answer>
@@ -131,13 +135,13 @@
                         <Answer Value="ch">Chińskie</Answer>
                     </Answers>
                 </Question>
-                <Question Key="DateOfBirth" Type="Date" Required>
+                <Question Key="DateOfBirth" Type="Date" Required="true">
                     <Title>Data urodzenia</Title>
                 </Question>
-                <Question Key="FavColor" Type="Color" Default="#ff0000" Required>
+                <Question Key="FavColor" Type="Color" Default="#ff0000" Required="true">
                     <Title>Ulubiony kolor</Title>
                 </Question>
-                <Question Key="History" Type="Textarea" MinLength="1" Required>
+                <Question Key="History" Type="Textarea" MinLength="1" Required="true">
                     <Title>Historia postaci</Title>
                 </Question>
                 <Question Key="Photo" Type="File">

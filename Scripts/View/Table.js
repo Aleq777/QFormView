@@ -1,77 +1,21 @@
 
 
-class Table
+class Table extends DataManipulator
 {
-    ID;
-    XML;
-    HTML;
-    // Kolumny i Grupy(Kolumn)
-    Columns;
-    // Płaska lista kolumn
-    SerializedColumns;
-    // Nazwy do referencji (string, przed eval)
-    RawDataSources;
-    // Bezpośrednie referencje (po eval)
-    DataSources;
-
     // Identyfikator dla komórki, żeby ID było zawsze wyjątkowe
     static GlobalCellID = 0;
 
+    Columns;
+    SerializedColumns;
+
     constructor (xml)
     {
-        this.XML = xml;
+        super (xml);
+
         this.Columns = [];
-        this.RawDataSources = { };
-        this.DataSources = { };
-        this.HTML = null;
-
-        this.Initialise();
-    }
-
-    Initialise()
-    {
-        this._SetDataSources();
+        this.SerializedColumns = null;
+        
         this._SetColumns(this.XML);
-    }
-
-    _SetDataSources()
-    {
-        const data = this.XML.FindTag("Data");
-
-        if (!data)
-            return;
-
-        const sources = data.GetTags("Source");
-
-        switch (sources.length)
-        {
-            case 0:
-
-                break;
-            case 1:
-                this._SetSingleSource(sources[0]);
-                break;
-            default:
-                sources.forEach(source => {
-                    this._SetSource(source)
-                });
-                break;
-        }
-    }
-
-    _SetSingleSource(source)
-    {
-        const value = source.innerHTML.trim();
-        this.RawDataSources.Main = value;
-        this.DataSources.Main = eval(value);
-    }
-
-    _SetSource(source)
-    {
-        const alias = source.Attr("Alias");
-        const value = source.innerHTML.trim();
-        this.RawDataSources[alias] = value;
-        this.DataSources[alias] = eval(value);
     }
 
     _SetColumns(xml)

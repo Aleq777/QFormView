@@ -13,4 +13,17 @@ class FormManager
 
         FormManager.InitialiseForms();
     }
+
+    static InitialiseForms()
+    {
+        const forms = FormManager.FormsXML.GetTags("Form");
+        log(FormManager.FormsXML);
+        forms.forEach(form => {
+            let f = new Form(form);
+
+            FormManager.Forms.push(f);
+
+            f.Display();
+        });
+    }
 }

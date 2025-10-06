@@ -19,11 +19,7 @@ class View extends Table
 
     _SetBasics()
     {
-        this.Name = this.XML.Attr("Name");
-        this.Title = this.XML.Attr("Title");
-        
-        if (this.XML.Has("Description"))
-            this.Description = this.XML.FindTag("Description").innerHTML.trim();
+        DataManipulator._SetHighBasics(this);
     }
 
     Display()
@@ -35,24 +31,7 @@ class View extends Table
 
     _InitialiseHTML()
     {
-        let fieldset = Create("fieldset");
-        
-        let legend = Create("legend");
-        legend.innerHTML = `<h3>${this.Title}</h3>`;
-        fieldset.appendChild(legend);
-
-        if (this.Description)
-        {
-            let desc = Create("div");
-            desc.innerHTML = this.Description;
-            fieldset.appendChild(desc);
-        }
-
-        let table = Create("table");
-        table.id = View.GetIDFromName(this.Name);
-        fieldset.appendChild(table);
-
-        Find(this.Name).appendChild(fieldset);
+        DataManipulator._InitialiseHighHTML(View, this);
     }
 
     static GetIDFromName(name)

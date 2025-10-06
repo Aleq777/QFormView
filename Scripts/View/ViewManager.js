@@ -17,14 +17,12 @@ class ViewManager
     static InitialiseViews()
     {
         const views = ViewManager.ViewsXML.GetTags("View");
-
+        
         views.forEach(view => {
 
             let v = new View(view);
 
-            ViewManager.Views.push(
-                v
-            );
+            ViewManager.Views.push(v);
 
             v.Display();
         });
