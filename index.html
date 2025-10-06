@@ -27,6 +27,9 @@
 
     
     <!-- FORMS -->
+    <script type="text/javascript" src="./Scripts/Form/Questions/PossibleAnswers.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/Question.js"></script>
+
     <script type="text/javascript" src="./Scripts/Form/Form.js"></script>
     <script type="text/javascript" src="./Scripts/Form/FormManager.js"></script>
     
@@ -94,60 +97,58 @@
                 Skonfiguruj postać
             </Description>
             <Data>
-                <Source>data.newUsers</Source>
+                <Source>data.users</Source>
             </Data>
-            <Questions>
-                <Question Key="Name" Type="Text" Required="true">
-                    <Title>Imię</Title>
-                </Question>
-                <Question Key="LastName" Type="Text" Required="true">
-                    <Title>Nazwisko</Title>
-                </Question>
-                <Question Key="Height" Type="Range" Min="160" Max="200">
-                    <Title>Wzrost</Title>
-                </Question>
-                <Question Key="Sex" Type="Radio" Required="true">
-                    <Description>Biologiczna płeć</Description>
-                    <Title>Płeć</Title>
-                    <Answers Default="m">
-                        <Answer Value="m">Mężczyzna</Answer>
-                        <Answer Value="k">
-                            <div style="color:#f00;">Kobieta</div>
-                        </Answer>
-                    </Answers>
-                </Question>
-                <Question Key="Job" Type="Select" Placeholder="Aa..." Required="true">
-                    <Title>Praca</Title>
-                    <Answers>
-                        <Answer Value="police">Policjant</Answer>
-                        <Answer Value="mecano">Mechanik</Answer>
-                        <Answer Value="ems">Medyk</Answer>
-                    </Answers>
-                </Question>
-                <Question Key="Country" Type="Multi" Placeholder="Aa..." Required="true">
-                    <Title>Obywatelstwo</Title>
-                    <Answers Order="Descending">
-                        <Answer Value="pl">Polskie</Answer>
-                        <Answer Value="us">Amerykańskie</Answer>
-                        <Answer Value="fr">Francuskie</Answer>
-                        <Answer Value="en">Brytyjskie</Answer>
-                        <Answer Value="sp">Hiszpańskie</Answer>
-                        <Answer Value="ch">Chińskie</Answer>
-                    </Answers>
-                </Question>
-                <Question Key="DateOfBirth" Type="Date" Required="true">
-                    <Title>Data urodzenia</Title>
-                </Question>
-                <Question Key="FavColor" Type="Color" Default="#ff0000" Required="true">
-                    <Title>Ulubiony kolor</Title>
-                </Question>
-                <Question Key="History" Type="Textarea" MinLength="1" Required="true">
-                    <Title>Historia postaci</Title>
-                </Question>
-                <Question Key="Photo" Type="File">
-                    <Title>Zdjęcie</Title>
-                </Question>
-            </Questions>
+            <Question Key="Name" Type="Text" Required="true">
+                <Title>Imię</Title>
+            </Question>
+            <Question Key="LastName" Type="Text" Required="true">
+                <Title>Nazwisko</Title>
+            </Question>
+            <Question Key="Height" Type="Range" Min="160" Max="200">
+                <Title>Wzrost</Title>
+            </Question>
+            <Question Key="Sex" Type="Radio" Required="true">
+                <Description>Biologiczna płeć</Description>
+                <Title>Płeć</Title>
+                <Answers Default="m">
+                    <Answer Value="m">Mężczyzna</Answer>
+                    <Answer Value="k">
+                        <div style="color:#f00;">Kobieta</div>
+                    </Answer>
+                </Answers>
+            </Question>
+            <Question Key="Job" Type="Select" Placeholder="Aa..." Required="true">
+                <Title>Praca</Title>
+                <Answers>
+                    <Answer Value="police">Policjant</Answer>
+                    <Answer Value="mecano">Mechanik</Answer>
+                    <Answer Value="ems">Medyk</Answer>
+                </Answers>
+            </Question>
+            <Question Key="Country" Type="Multi" Placeholder="Aa..." Required="true">
+                <Title>Obywatelstwo</Title>
+                <Answers Order="Descending">
+                    <Answer Value="pl">Polskie</Answer>
+                    <Answer Value="us">Amerykańskie</Answer>
+                    <Answer Value="fr">Francuskie</Answer>
+                    <Answer Value="en">Brytyjskie</Answer>
+                    <Answer Value="sp">Hiszpańskie</Answer>
+                    <Answer Value="ch">Chińskie</Answer>
+                </Answers>
+            </Question>
+            <Question Key="DateOfBirth" Type="Date" Required="true">
+                <Title>Data urodzenia</Title>
+            </Question>
+            <Question Key="FavColor" Type="Color" Default="#ff0000" Required="true">
+                <Title>Ulubiony kolor</Title>
+            </Question>
+            <Question Key="History" Type="Textarea" MinLength="1" Required="true">
+                <Title>Historia postaci</Title>
+            </Question>
+            <Question Key="Photo" Type="File">
+                <Title>Zdjęcie</Title>
+            </Question>
             <!-- Independent -->
             <Matrix>
                 <Records>

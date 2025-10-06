@@ -88,7 +88,6 @@ class DataManipulator
         table.id = T.GetIDFromName(object.Name);
         fieldset.appendChild(table);
 
-        log(object instanceof Form);
         Find(object.Name).appendChild(fieldset);
     }
 

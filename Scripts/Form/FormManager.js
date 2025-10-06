@@ -17,7 +17,7 @@ class FormManager
     static InitialiseForms()
     {
         const forms = FormManager.FormsXML.GetTags("Form");
-        log(FormManager.FormsXML);
+
         forms.forEach(form => {
             let f = new Form(form);
 
