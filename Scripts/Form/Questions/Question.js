@@ -1,4 +1,16 @@
-
+const EnumQuestionTypes = {
+    Text:       "Text",
+    Number:     "Number",
+    Password:   "Password",
+    Range:      "Range",
+    Radio:      "Radio",
+    Select:     "Select",
+    Multi:      "Multi",
+    Date:       "Date",
+    Color:      "Color",
+    Textarea:   "Textarea",
+    File:       "File"
+};
 
 class Question
 {
@@ -7,6 +19,7 @@ class Question
     Key;
     IsRequired;
     PossibleAnswers;
+    DefaultValue;
 
     constructor (xml)
     {
@@ -15,6 +28,7 @@ class Question
         this.Title = xml.FindTag("Title");
         this.Key = xml.Attr("Key");
         this.IsRequired = xml.Attr("Required") == "true";
+        this.DefaultValue = xml.Attr("Default");
 
         this.PossibleAnswers = [];
 

@@ -1,15 +1,4 @@
 
-const EnumQuestionTypes = {
-    Text: "Text",
-    Range: "Range",
-    Radio: "Radio",
-    Select: "Select",
-    Multi: "Multi",
-    Date: "Date",
-    Color: "Color",
-    Textarea: "Textarea",
-    File: "File"
-};
 
 class Form extends DataManipulator
 {
@@ -66,7 +55,12 @@ class Form extends DataManipulator
 
         switch (type)
         {
-
+            case EnumQuestionTypes.Text:
+                return new QuestionText(question);
+            case EnumQuestionTypes.Number:
+                return new QuestionNumber(question);
+            case EnumQuestionTypes.Password:
+                return new QuestionPassword(question);
             default:
                 return null;
         }

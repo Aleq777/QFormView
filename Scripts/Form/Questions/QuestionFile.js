@@ -1,6 +1,6 @@
 
 
-class QuestionText extends Question
+class QuestionFile extends Question
 {
 
     constructor (xml)

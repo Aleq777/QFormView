@@ -1,6 +1,6 @@
 
 
-class QuestionText extends Question
+class QuestionTextarea extends Question
 {
 
     constructor (xml)
