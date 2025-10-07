@@ -1,30 +1,19 @@
 
 
-class ViewManager
+class ViewManager extends Manager
 {
-    static ViewsXML = null;
-    static Views = [];
-
-    static Start()
+    constructor ()
     {
-        const parser = new DOMParser();
-
-        ViewManager.ViewsXML = parser.parseFromString( Find("views").innerHTML, "application/xml" );
-
-        ViewManager.InitialiseViews();
+        super ();
+    }
+    
+    Start()
+    {
+        super.Start("views");
     }
 
-    static InitialiseViews()
+    _InitializeInstances()
     {
-        const views = ViewManager.ViewsXML.GetTags("View");
-        
-        views.forEach(view => {
-
-            let v = new View(view);
-
-            ViewManager.Views.push(v);
-
-            v.Display();
-        });
+        super._InitializeInstances("View", View);
     }
 }
