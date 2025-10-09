@@ -15,6 +15,7 @@ class Form extends DataManipulator
     {
         super (xml);
 
+        this.ID = Form.GetIDFromName(xml.Attr("Name"));
         this.Name = null;
         this.Title = null;
         this.Description = null;
@@ -41,11 +42,11 @@ class Form extends DataManipulator
         this.XML.forEach(element => {
             let question;
 
+            
             switch (element.tagName)
             {
                 case "Question":
                     question = Form.NewQuestion(element);
-                
                     this.Questions.push(question);
                     break;
                 default:
@@ -73,15 +74,8 @@ class Form extends DataManipulator
         return `${name}Form`;
     }
 
-    _FillForm()
-    {
-
-    }
-
     static NewQuestion(xml)
     {
-        log(xml);
-
         switch (xml.Attr("Type"))
         {
             case EnumQuestionTypes.Text:
@@ -130,4 +124,14 @@ class Form extends DataManipulator
                 return null;
         }
     }
+
+    _FillForm()
+    {
+
+        this.Questions.forEach(question => {
+            let q = question.CreateHTML();
+            this.HTML.appendChild(q);
+        });
+    }
+
 }

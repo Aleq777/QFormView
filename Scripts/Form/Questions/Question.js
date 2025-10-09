@@ -26,6 +26,15 @@ class Question
 
     constructor (xml)
     {
+        this.Title = xml.FindTag("Title").innerHTML;
+        this.Description = xml.FindTag("Description")?.innerHTML;
+        this.IsRequired = xml.Attr("Required") == "true";
+        this.Key = xml.Attr("Key");
+        this.Default = xml.Attr("Default");
+    }
 
+    CreateHTML()
+    {
+        return null;
     }
 }
