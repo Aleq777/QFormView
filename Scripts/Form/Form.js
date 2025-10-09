@@ -56,9 +56,11 @@ class Form extends DataManipulator
 
     Display()
     {
+        this.HTML = document.getElementById(`${this.ID}`);
+        
         this._InitialiseHTML();
 
-        this.HTML = document.getElementById(`${this.ID}`);
+        this._FillForm();
     }
 
     _InitialiseHTML()
@@ -71,8 +73,61 @@ class Form extends DataManipulator
         return `${name}Form`;
     }
 
+    _FillForm()
+    {
+
+    }
+
     static NewQuestion(xml)
     {
-        
+        log(xml);
+
+        switch (xml.Attr("Type"))
+        {
+            case EnumQuestionTypes.Text:
+                return new QuestionText(xml);
+
+            case EnumQuestionTypes.Checkbox:
+                return new QuestionCheckbox(xml);
+
+            case EnumQuestionTypes.Color:
+                return new QuestionColor(xml);
+
+            case EnumQuestionTypes.Date:
+                return new QuestionDate(xml);
+
+            case EnumQuestionTypes.File:
+                return new QuestionFile(xml);
+
+            case EnumQuestionTypes.MultiSelect:
+                return new QuestionMultiSelect(xml);
+
+            case EnumQuestionTypes.Number:
+                return new QuestionNumber(xml);
+
+            case EnumQuestionTypes.ObjectMultiSelect:
+                return new QuestionMultiSelect(xml);
+
+            case EnumQuestionTypes.ObjectSelect:
+                return new QuestionObjectSelect(xml);
+
+            case EnumQuestionTypes.Paragraph:
+                return new QuestionParagraph(xml);
+
+            case EnumQuestionTypes.Radio:
+                return new QuestionRadio(xml);
+
+            case EnumQuestionTypes.Range:
+                return new QuestionRange(xml);
+
+            case EnumQuestionTypes.Select:
+                return new QuestionSelect(xml);
+
+            case EnumQuestionTypes.Text:
+                return new QuestionText(xml);
+
+            default:
+                return null;
+        }
     }
 }
