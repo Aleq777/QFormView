@@ -5,6 +5,16 @@ class Form extends DataManipulator
 {
     static GlobalCellID = 0;
 
+    static UseCellID()
+    {
+        return Form.GlobalCellID++;
+    }
+
+    static GetCellID()
+    {
+        return `cell${Form.UseCellID()}`;
+    }
+
     Name;
     Title;
     Description;
@@ -57,9 +67,9 @@ class Form extends DataManipulator
 
     Display()
     {
-        this.HTML = document.getElementById(`${this.ID}`);
-        
         this._InitialiseHTML();
+
+        this.HTML = document.getElementById(`${this.ID}`);
 
         this._FillForm();
     }
@@ -118,10 +128,8 @@ class Form extends DataManipulator
                 return new QuestionSelect(xml);
 
             case EnumQuestionTypes.Text:
-                return new QuestionText(xml);
-
             default:
-                return null;
+                return new QuestionText(xml);
         }
     }
 

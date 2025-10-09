@@ -23,9 +23,11 @@ class Question
     IsRequired;
     Key;
     Default;
+    XML;
 
     constructor (xml)
     {
+        this.XML = xml;
         this.Title = xml.FindTag("Title").innerHTML;
         this.Description = xml.FindTag("Description")?.innerHTML;
         this.IsRequired = xml.Attr("Required") == "true";
@@ -36,5 +38,16 @@ class Question
     CreateHTML()
     {
         return null;
+    }
+
+    _GetBaseHTML()
+    {
+        let tr = Create("tr");
+
+        let th = Create("th");
+        th.innerText = this.Title;
+        tr.appendChild(th);
+
+        return tr;
     }
 }
