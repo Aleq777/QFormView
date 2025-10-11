@@ -16,5 +16,12 @@ class QuestionCheckbox extends Question
         checkbox.id = Form.GetCellID();
         
         this.Cell.appendChild(checkbox);
+
+        this.HTML = checkbox;
+    }
+
+    Reset()
+    {
+        this.HTML.checked = this.Default;
     }
 }

@@ -15,5 +15,7 @@ class QuestionParagraph extends QuestionText
         textarea.id = Form.GetCellID();
 
         this.Cell.appendChild(textarea);
+
+        this.HTML = textarea;
     }
 }

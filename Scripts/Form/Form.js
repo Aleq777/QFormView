@@ -75,12 +75,28 @@ class Form extends DataManipulator
 
         this.HTML = document.getElementById(`${this.ID}`);
 
+        this._InitialiseButtons();
+
         this._FillForm();
     }
 
     _InitialiseHTML()
     {
         DataManipulator._InitialiseHighHTML(Form, this);
+    }
+
+    _InitialiseButtons()
+    {
+        this.Actions.forEach(item => {
+            let button = Create("button");
+            button.type = "button";
+            button.innerHTML = item.Title;
+            button.onclick = () => {
+                item.Procedure(this);
+            };
+
+            Find(this.Name).FindTag("fieldset").appendChild(button);
+        });
     }
 
     static GetIDFromName(name)
@@ -182,25 +198,35 @@ class Form extends DataManipulator
             default:
                 title ??= "Akcja";
                 procedure = eval(action.Attr("Action"));
+                procedure(2);
                 return new Action(title, procedure);
         }
     }
 
     Submit()
     {
-        this.Check();
+        if (!this.Check())
+            return;
+
+        log(2);
     }
 
     Clear()
     {
         this.Questions.forEach(question => {
             question.Reset();
-        })
+        });
     }
 
     Check()
     {
+        let isCorrect = true;
 
+        this.Questions.forEach(question => {
+            isCorrect &&= question.Check(); // must be all true
+        });
+
+        return isCorrect;
     }
 
 }

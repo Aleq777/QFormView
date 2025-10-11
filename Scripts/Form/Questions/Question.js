@@ -23,12 +23,9 @@ class Question
     Key;
     Default;
     XML;
+    HTML;
     // Cell in the table
     Cell;
-    // Is the answer wrong?
-    ErrorType;
-    // Error Cell to display
-    ErrorCell;
 
     // Possible errors
     static ErrorFeed = { };
@@ -36,6 +33,7 @@ class Question
     constructor (xml)
     {
         this.XML = xml;
+        this.HTML = null;
         this.Title = xml.FindTag("Title").innerHTML;
         this.Description = xml.FindTag("Description")?.innerHTML;
         this.IsRequired = xml.Attr("Required") == "true";
@@ -71,26 +69,38 @@ class Question
         obj.appendChild(tr);
     }
 
-    CheckErrorType()
-    {
-        this.ErrorType = null;
-    }
-
-    ReloadError()
-    {
-        if (this.ErrorType === null)
-        {
-            this.ErrorCell.hidden = true;
-        }
-        else
-        {
-            this.ErrorCell.innerHTML = Question.ErrorFeed[this.ErrorType];
-            this.ErrorCell.hidden = false;
-        }
-    }
-
     // abstract
     Reset()
-    { }
+    {
+        this.HTML.value = this.Default;
+    }
+
+    Check()
+    {
+        return true;
+    }
+
+    ShowError(errorType)
+    {
+        return false;
+    }
+
+    HideErrors()
+    {
+        Find(this.ErrorID).hidden = true;
+        return true;
+    }
+
+    _ActivateError(content)
+    {
+        const obj = Find(this.ErrorID);
+        obj.innerHTML = content;
+        obj.hidden = false;
+    }
+
+    _DeactivateError()
+    {
+        Find(this.ErrorID).hidden = true;
+    }
 
 }

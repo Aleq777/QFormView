@@ -12,9 +12,10 @@ class QuestionRadio extends ComplexQuestion
         this._SetBaseHTML(obj);
 
         const name = ComplexQuestion.GetInteractiveName();
+
+        this.HTML = { };
         
         this.Answers.forEach(answer => {
-
 
             let label = Create("label");
             label.style.display = "inline-block";
@@ -33,7 +34,20 @@ class QuestionRadio extends ComplexQuestion
 
             this.Cell.appendChild(label);
 
+            this.HTML[answer.Value] = input;
+
         });
+    }
+
+    Reset()
+    {
+        Object.entries(this.HTML).forEach(entry => {
+            const [key, value] = entry;
+            
+            value.checked = false;
+            if (key === this.Default)
+                value.checked = true;
+        })
     }
     
 }

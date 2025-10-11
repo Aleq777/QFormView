@@ -35,5 +35,15 @@ class QuestionRange extends QuestionNumber
         
         this.Cell.appendChild(range);
         this.Cell.appendChild(num);
+
+        this.HTML = range;
+    }
+
+    Reset()
+    {
+        super.Reset();
+        this.HTML.dispatchEvent(
+            new Event("change")
+        );
     }
 }

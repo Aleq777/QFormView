@@ -16,5 +16,7 @@ class QuestionFile extends Question
         file.id = Form.GetCellID();
 
         this.Cell.appendChild(file);
+
+        this.HTML = file;
     }
 }

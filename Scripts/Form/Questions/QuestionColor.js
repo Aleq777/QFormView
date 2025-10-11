@@ -16,5 +16,7 @@ class QuestionColor extends Question
         color.id = Form.GetCellID();
 
         this.Cell.appendChild(color);
+
+        this.HTML = color;
     }
 }

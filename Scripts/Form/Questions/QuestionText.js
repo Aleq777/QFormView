@@ -28,5 +28,7 @@ class QuestionText extends Question
             text.maxLength = this.MaxLength;
 
         this.Cell.appendChild(text);
+
+        this.HTML = text;
     }
 }
