@@ -7,20 +7,14 @@ class QuestionColor extends Question
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         let color = Create("input");
         color.type = "color";
         color.id = Form.GetCellID();
 
-        td.appendChild(color);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(color);
     }
 }

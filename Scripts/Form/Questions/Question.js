@@ -13,7 +13,6 @@ const EnumQuestionTypes = {
     Date: "Date",
     File: "File",
     Color: "Color",
-
 }
 
 class Question
@@ -24,6 +23,15 @@ class Question
     Key;
     Default;
     XML;
+    // Cell in the table
+    Cell;
+    // Is the answer wrong?
+    ErrorType;
+    // Error Cell to display
+    ErrorCell;
+
+    // Possible errors
+    static ErrorFeed = { };
 
     constructor (xml)
     {
@@ -33,6 +41,9 @@ class Question
         this.IsRequired = xml.Attr("Required") == "true";
         this.Key = xml.Attr("Key");
         this.Default = xml.Attr("Default");
+        this.Cell = null;
+        this.ErrorType = null;
+        this.ErrorID = null;
     }
 
     CreateHTML()
@@ -40,7 +51,7 @@ class Question
         return null;
     }
 
-    _GetBaseHTML()
+    _SetBaseHTML(obj)
     {
         let tr = Create("tr");
 
@@ -48,6 +59,34 @@ class Question
         th.innerText = this.Title;
         tr.appendChild(th);
 
-        return tr;
+        let td = Create("td");
+        tr.appendChild(td);
+        this.Cell = td;
+
+        let error = Create("td");
+        error.hidden = true;
+        tr.appendChild(error);
+        this.ErrorCell = error;
+
+        obj.appendChild(tr);
     }
+
+    CheckErrorType()
+    {
+        this.ErrorType = null;
+    }
+
+    ReloadError()
+    {
+        if (this.ErrorType === null)
+        {
+            this.ErrorCell.hidden = true;
+        }
+        else
+        {
+            this.ErrorCell.innerHTML = Question.ErrorFeed[this.ErrorType];
+            this.ErrorCell.hidden = false;
+        }
+    }
+
 }

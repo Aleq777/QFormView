@@ -7,20 +7,14 @@ class QuestionDate extends Question
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         let date = Create("input");
         date.type = "date";
         date.id = Form.GetCellID();
 
-        td.appendChild(date);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(date);
     }
 }

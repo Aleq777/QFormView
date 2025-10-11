@@ -7,20 +7,14 @@ class QuestionText extends Question
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         let text = Create("input");
         text.type = "text";
         text.id = Form.GetCellID();
 
-        td.appendChild(text);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(text);
     }
 }

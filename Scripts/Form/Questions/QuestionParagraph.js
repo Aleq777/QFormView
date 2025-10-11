@@ -7,19 +7,13 @@ class QuestionParagraph extends Question
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         let textarea = Create("textarea");
         textarea.id = Form.GetCellID();
 
-        td.appendChild(textarea);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(textarea);
     }
 }

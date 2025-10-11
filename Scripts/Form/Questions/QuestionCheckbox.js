@@ -7,20 +7,14 @@ class QuestionCheckbox extends Question
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         let checkbox = Create("input");
         checkbox.type = "checkbox";
         checkbox.id = Form.GetCellID();
         
-        td.appendChild(checkbox);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(checkbox);
     }
 }

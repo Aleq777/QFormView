@@ -7,20 +7,14 @@ class QuestionFile extends Question
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         let file = Create("input");
         file.type = "file";
         file.id = Form.GetCellID();
 
-        td.appendChild(file);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(file);
     }
 }

@@ -7,11 +7,9 @@ class QuestionSelect extends ComplexQuestion
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
         
         let select = Create("select");
         select.id = Form.GetCellID();
@@ -25,10 +23,6 @@ class QuestionSelect extends ComplexQuestion
 
         });
 
-        td.appendChild(select);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(select);
     }
 }

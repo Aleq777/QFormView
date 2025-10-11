@@ -7,11 +7,9 @@ class QuestionRadio extends ComplexQuestion
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         const name = ComplexQuestion.GetInteractiveName();
         
@@ -19,6 +17,7 @@ class QuestionRadio extends ComplexQuestion
 
 
             let label = Create("label");
+            label.style.display = "inline-block";
 
             let input = Create("input");
             input.type = "radio";
@@ -32,14 +31,9 @@ class QuestionRadio extends ComplexQuestion
             title.innerHTML = answer.Content;
             label.appendChild(title);
 
-            td.appendChild(label);
+            this.Cell.appendChild(label);
 
         });
-
-        tr.appendChild(td);
-
-        return tr;
     }
-
     
 }

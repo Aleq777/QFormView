@@ -137,8 +137,9 @@ class Form extends DataManipulator
     {
 
         this.Questions.forEach(question => {
-            let q = question.CreateHTML();
-            this.HTML.appendChild(q);
+            question.CreateHTML(this.HTML);
+            // let q = question.CreateHTML();
+            // this.HTML.appendChild(q);
         });
     }
 

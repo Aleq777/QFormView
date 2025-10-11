@@ -7,12 +7,10 @@ class QuestionMultiSelect extends ComplexQuestion
         super (xml);
     }
     
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
+        this._SetBaseHTML(obj);
 
-        let td = Create("td");
-        
         let select = Create("select");
         select.id = Form.GetCellID();
         select.multiple = true;
@@ -26,11 +24,7 @@ class QuestionMultiSelect extends ComplexQuestion
 
         });
 
-        td.appendChild(select);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(select);
     }
 
 }

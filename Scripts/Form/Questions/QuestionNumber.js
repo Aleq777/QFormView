@@ -7,20 +7,14 @@ class QuestionNumber extends Question
         super (xml);
     }
 
-    CreateHTML()
+    CreateHTML(obj)
     {
-        let tr = this._GetBaseHTML();
-
-        let td = Create("td");
+        this._SetBaseHTML(obj);
 
         let num = Create("input");
         num.type = "number";
         num.id = Form.GetCellID();
 
-        td.appendChild(num);
-
-        tr.appendChild(td);
-
-        return tr;
+        this.Cell.appendChild(num);
     }
 }
