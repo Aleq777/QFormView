@@ -153,12 +153,52 @@ class Form extends DataManipulator
         
         actions.forEach(item => {
 
-            log(item);
+            let action = this.NewAction(item);
+
+            this.Actions.push(action);
 
         });
     }
 
+    NewAction(action)
+    {
+        let title = action.Attr("Title");
+        let procedure;
+        const type = action.Attr("Type");
+
+        switch (type)
+        {
+            case EnumButtonTypes.Clear:
+                title ??= "Resetuj";
+                return new Action(title, () => {
+                    this.Clear();
+                });
+            case EnumButtonTypes.Submit:
+                title ??= "Dodaj";
+                return new Action(title, () => {
+                    this.Submit();
+                });
+            case EnumButtonTypes.Action:
+            default:
+                title ??= "Akcja";
+                procedure = eval(action.Attr("Action"));
+                return new Action(title, procedure);
+        }
+    }
+
     Submit()
+    {
+        this.Check();
+    }
+
+    Clear()
+    {
+        this.Questions.forEach(question => {
+            question.Reset();
+        })
+    }
+
+    Check()
     {
 
     }
