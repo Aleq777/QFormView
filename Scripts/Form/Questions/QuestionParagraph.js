@@ -1,6 +1,6 @@
 
 
-class QuestionParagraph extends Question
+class QuestionParagraph extends QuestionText
 {
     constructor (xml)
     {
