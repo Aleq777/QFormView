@@ -20,6 +20,7 @@ class Form extends DataManipulator
     Description;
 
     Questions;
+    Actions;
 
     constructor (xml)
     {
@@ -31,10 +32,13 @@ class Form extends DataManipulator
         this.Description = null;
 
         this.Questions = [];
+        this.Actions = [];
 
         this._SetBasics();
 
         this._SetQuestions();
+
+        this._SetActions();
     }
 
     _SetBasics()
@@ -141,6 +145,22 @@ class Form extends DataManipulator
             // let q = question.CreateHTML();
             // this.HTML.appendChild(q);
         });
+    }
+
+    _SetActions()
+    {
+        const actions = this.XML.FindTag("Actions");
+        
+        actions.forEach(item => {
+
+            log(item);
+
+        });
+    }
+
+    Submit()
+    {
+
     }
 
 }
