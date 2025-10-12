@@ -26,5 +26,7 @@ class QuestionSelect extends ComplexQuestion
         this.Cell.appendChild(select);
 
         this.HTML = select;
+
+        this.Reset();
     }
 }

@@ -29,6 +29,8 @@ class QuestionDate extends Question
         this.Cell.appendChild(date);
 
         this.HTML = date;
+
+        this.Reset();
     }
 
     static ErrorTypes = {

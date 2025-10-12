@@ -18,5 +18,7 @@ class QuestionColor extends Question
         this.Cell.appendChild(color);
 
         this.HTML = color;
+
+        this.Reset();
     }
 }

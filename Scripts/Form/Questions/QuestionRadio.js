@@ -37,6 +37,8 @@ class QuestionRadio extends ComplexQuestion
             this.HTML[answer.Value] = input;
 
         });
+
+        this.Reset();
     }
 
     Reset()

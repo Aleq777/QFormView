@@ -30,5 +30,7 @@ class QuestionText extends Question
         this.Cell.appendChild(text);
 
         this.HTML = text;
+
+        this.Reset();
     }
 }

@@ -34,6 +34,8 @@ class QuestionNumber extends Question
         this.Cell.appendChild(num);
 
         this.HTML = num;
+
+        this.Reset();
     }
 
     static ErrorTypes = {

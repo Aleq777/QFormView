@@ -18,5 +18,7 @@ class QuestionFile extends Question
         this.Cell.appendChild(file);
 
         this.HTML = file;
+
+        this.Reset();
     }
 }

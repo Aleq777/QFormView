@@ -18,6 +18,8 @@ class QuestionCheckbox extends Question
         this.Cell.appendChild(checkbox);
 
         this.HTML = checkbox;
+
+        this.Reset();
     }
 
     Reset()

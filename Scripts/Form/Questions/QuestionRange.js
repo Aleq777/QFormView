@@ -37,6 +37,8 @@ class QuestionRange extends QuestionNumber
         this.Cell.appendChild(num);
 
         this.HTML = range;
+
+        this.Reset();
     }
 
     Reset()

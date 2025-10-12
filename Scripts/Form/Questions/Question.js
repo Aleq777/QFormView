@@ -26,6 +26,8 @@ class Question
     HTML;
     // Cell in the table
     Cell;
+    // The cell of the Error
+    ErrorCell;
 
     // Possible errors
     static ErrorFeed = { };
@@ -40,8 +42,7 @@ class Question
         this.Key = xml.Attr("Key");
         this.Default = xml.Attr("Default");
         this.Cell = null;
-        this.ErrorType = null;
-        this.ErrorID = null;
+        this.ErrorCell = null;
     }
 
     CreateHTML()
@@ -87,20 +88,20 @@ class Question
 
     HideErrors()
     {
-        Find(this.ErrorID).hidden = true;
+        this.ErrorCell.hidden = true;
         return true;
     }
 
     _ActivateError(content)
     {
-        const obj = Find(this.ErrorID);
+        const obj = this.ErrorCell;
         obj.innerHTML = content;
         obj.hidden = false;
     }
 
     _DeactivateError()
     {
-        Find(this.ErrorID).hidden = true;
+        this.ErrorCell.hidden = true;
     }
 
 }

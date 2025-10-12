@@ -17,5 +17,12 @@ class QuestionParagraph extends QuestionText
         this.Cell.appendChild(textarea);
 
         this.HTML = textarea;
+
+        this.Reset();
+    }
+
+    Reset()
+    {
+        this.HTML.value = this.Default;
     }
 }
