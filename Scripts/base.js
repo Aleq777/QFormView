@@ -7,6 +7,23 @@ const Find = id => document.getElementById(id);
 
 const Create = element => document.createElement(element);
 
+
+function CompareLess(a, b)
+{
+    if (!a || !b)
+        return null;
+
+    return a < b;
+}
+
+function CompareBigger(a, b)
+{
+    if (!a || !b)
+        return null;
+
+    return a > b;
+}
+
 //#region Collection getters
 Document.prototype.GetTags = function (tag)
 {

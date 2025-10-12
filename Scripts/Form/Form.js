@@ -198,7 +198,6 @@ class Form extends DataManipulator
             default:
                 title ??= "Akcja";
                 procedure = eval(action.Attr("Action"));
-                procedure(2);
                 return new Action(title, procedure);
         }
     }
@@ -207,8 +206,6 @@ class Form extends DataManipulator
     {
         if (!this.Check())
             return;
-
-        log(2);
     }
 
     Clear()

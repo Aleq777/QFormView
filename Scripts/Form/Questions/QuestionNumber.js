@@ -38,11 +38,6 @@ class QuestionNumber extends Question
         this.Reset();
     }
 
-    static ErrorTypes = {
-        TooLow: "TooLow",
-        TooHigh: "TooHigh"
-    };
-
     static ErrorMessages = {
         TooLow: required => `Wartość minimalna to ${required}`,
         TooHigh: required => `Wartość maksymalna to ${required}`

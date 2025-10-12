@@ -33,4 +33,41 @@ class QuestionText extends Question
 
         this.Reset();
     }
+
+    static ErrorTypes = {
+        TooShortText: "TooShortText",
+        TooLongText: "TooLongText",
+    };
+
+    static ErrorMessages = {
+        TooShortText: () => `Minimalna długość tekstu to ${this.MinLength}`,
+        TooLongText: () => `Maksymalna długość tekstu to ${this.MaxLength}`,
+    };
+
+    Check()
+    {
+
+        if (!this.CheckIsFilledIfRequired())
+            return false;
+
+        // Required -> check if its good
+        // not Required -> if its given value, it should be at least correct
+        const length = this.GetValue().length;
+
+        if (length > 0)
+        {
+            if (CompareLess(length, this.MinLength))
+                return this.ShowError(QuestionText.ErrorTypes.TooShortText);
+
+            if (CompareBigger(length, this.MaxLength))
+                return this.ShowError(QuestionText.ErrorTypes.TooLongText);
+        }
+
+        return this.HideErrors();
+    }
+
+    ShowError(errorType)
+    {
+        super.ShowBaseError(QuestionText.ErrorMessages, errorType);
+    }
 }

@@ -30,7 +30,18 @@ class Question
     ErrorCell;
 
     // Possible errors
-    static ErrorFeed = { };
+    static ErrorTypes = {
+        FieldRequired: "FieldRequired",
+        UnknownError: "UnknownError",
+    }
+
+    static ErrorMessages = {
+        FieldRequired: () => `To pole jest wymagane!`,
+        UnknownError: data => {
+            log(data);
+            return `Nieznany błąd! W konsoli szczegóły`;
+        },
+    };
 
     constructor (xml)
     {
@@ -71,6 +82,12 @@ class Question
     }
 
     // abstract
+    GetValue()
+    {
+        return this.HTML.value;
+    }
+
+    // abstract
     Reset()
     {
         this.HTML.value = this.Default;
@@ -81,8 +98,47 @@ class Question
         return true;
     }
 
+    CheckIsFilledIfRequired()
+    {
+        const result = !this.IsRequired || this.GetValue().length > 0;
+
+        if (result)
+            return true;
+        
+        // log(Question.ErrorMessages);
+        log(2);
+
+        this.ShowBaseError(Question.ErrorMessages, Question.ErrorTypes.FieldRequired);
+        return false;
+    }
+
+    // abstract
     ShowError(errorType)
     {
+        return false;
+    }
+
+    ShowBaseError(errorFeed, errorType, data)
+    {
+        let errorMsg;
+
+        // log(errorType);
+
+        switch (errorType)
+        {
+            case Question.ErrorTypes.FieldRequired:
+                errorMsg = Question.ErrorMessages.FieldRequired(data);
+                break;
+            case Question.ErrorTypes.UnknownError:
+                errorMsg = Question.ErrorMessages.UnknownError(data);
+                break;
+            default:
+                errorMsg = errorFeed[errorType](data);
+                break;
+        }
+
+        this.ErrorCell.innerHTML = errorMsg;
+        this.ErrorCell.hidden = false;
         return false;
     }
 
