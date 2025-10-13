@@ -21,4 +21,12 @@ class QuestionFile extends Question
 
         this.Reset();
     }
+
+    Check()
+    {
+        if (!this.CheckIsFilledIfRequired())
+            return false;
+
+        return this.HideErrors();
+    }
 }

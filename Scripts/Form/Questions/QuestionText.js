@@ -40,8 +40,8 @@ class QuestionText extends Question
     };
 
     static ErrorMessages = {
-        TooShortText: () => `Minimalna długość tekstu to ${this.MinLength}`,
-        TooLongText: () => `Maksymalna długość tekstu to ${this.MaxLength}`,
+        TooShortText: data => `Minimalna długość tekstu to ${data.MinLength}`,
+        TooLongText: data => `Maksymalna długość tekstu to ${data.MaxLenght}`,
     };
 
     Check()

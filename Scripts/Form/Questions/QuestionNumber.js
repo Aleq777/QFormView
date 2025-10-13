@@ -45,44 +45,26 @@ class QuestionNumber extends Question
 
     Check()
     {
+        if (!this.CheckIsFilledIfRequired())
+            return false;
+
         const value = this.HTML.value;
 
         const min = this.Min ?? value;
 
         if (value < min)
-        {
             return this.ShowError(QuestionDate.ErrorTypes.TooLow);
-        }
 
         const max = this.Max ?? value;
 
         if (value > max)
-        {
             return this.ShowError(QuestionDate.ErrorTypes.TooHigh);
-        }
 
         return this.HideErrors();
     }
 
     ShowError(errorType)
     {
-        let value;
-
-        switch (errorType)
-        {
-            case QuestionDate.ErrorTypes.TooLow:
-                value = this.Min;
-                break;
-            case QuestionDate.ErrorTypes.TooHigh:
-                value = this.Max;
-                break;
-            default:
-                value = null;
-                break;
-        }
-
-        this._ActivateError(QuestionDate.ErrorMessages[errorType](value));
-                    
-        return super.ShowError(errorType);
+        super.ShowBaseError(QuestionNumber.ErrorMessages, errorType, this);
     }
 }

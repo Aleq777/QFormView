@@ -123,7 +123,7 @@
             <Question Key="LastName" Type="Text" Required="true">
                 <Title>Nazwisko</Title>
             </Question>
-            <Question Key="Height" Type="Range" Min="160" Max="200">
+            <Question Key="Height" Type="Range" Min="160" Max="200" Step="0.1">
                 <Title>Wzrost</Title>
             </Question>
             <Question Key="Sex" Type="Radio" Required="true">
@@ -164,10 +164,10 @@
             <Question Key="History" Type="Paragraph" MinLength="1" Required="true">
                 <Title>Historia postaci</Title>
             </Question>
-            <Question Key="Photo" Type="File">
+            <Question Key="Photo" Type="File" Required="true">
                 <Title>Zdjęcie</Title>
             </Question>
-            <Question Key="Accept" Type="Checkbox" Default="true">
+            <Question Key="Accept" Type="Checkbox" Default="true" Required="true">
                 <Title>Akceptuję warunki taniej siły roboczej</Title>
             </Question>
             <!-- Independent -->

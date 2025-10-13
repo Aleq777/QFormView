@@ -29,4 +29,12 @@ class QuestionSelect extends ComplexQuestion
 
         this.Reset();
     }
+
+    Check()
+    {
+        if (!this.CheckIsFilledIfRequired())
+            return false;
+
+        return this.HideErrors();
+    }
 }

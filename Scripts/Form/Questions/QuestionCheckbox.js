@@ -22,8 +22,32 @@ class QuestionCheckbox extends Question
         this.Reset();
     }
 
+    Check()
+    {
+        if (!this.CheckIsFilledIfRequired())
+            return false;
+
+        return this.HideErrors();
+    }
+
+    ShowError(errorType)
+    {
+        super.ShowBaseError(Question.ErrorMessages, errorType);
+    }
+
     Reset()
     {
         this.HTML.checked = this.Default;
+    }
+
+    CheckIsFilledIfRequired()
+    {
+        if (this.IsRequired && !this.HTML.checked)
+        {
+            this.ShowBaseError(Question.ErrorMessages, Question.ErrorTypes.FieldRequired);
+            return false;
+        }
+
+        return true;
     }
 }

@@ -45,21 +45,20 @@ class QuestionDate extends Question
 
     Check()
     {
+        if (!this.CheckIsFilledIfRequired())
+            return false;
+
         const value = this.HTML.value;
 
         const min = this.Min ?? value;
 
         if (value < min)
-        {
             return this.ShowError(QuestionDate.ErrorTypes.TooLow);
-        }
 
         const max = this.Max ?? value;
 
         if (value > max)
-        {
             return this.ShowError(QuestionDate.ErrorTypes.TooHigh)
-        }
 
         return this.HideErrors();
     }
