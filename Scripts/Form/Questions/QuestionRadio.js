@@ -49,7 +49,7 @@ class QuestionRadio extends ComplexQuestion
             value.checked = false;
             if (key === this.Default)
                 value.checked = true;
-        })
+        });
     }
 
     GetValue()

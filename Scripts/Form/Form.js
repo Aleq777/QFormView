@@ -22,6 +22,9 @@ class Form extends DataManipulator
     Questions;
     Actions;
     ConnectedView;
+    // null - not
+    // object - yes its editing
+    Editing;
 
     constructor (xml)
     {
@@ -31,6 +34,7 @@ class Form extends DataManipulator
         this.Name = null;
         this.Title = null;
         this.Description = null;
+        this.Editing = null;
 
         this.Questions = [];
         this.Actions = [];
@@ -51,7 +55,7 @@ class Form extends DataManipulator
         super.Display(
             Form.GetIDFromName(this.Name),
             document
-        )
+        );
     }
 
     _SetQuestions()
@@ -69,7 +73,7 @@ class Form extends DataManipulator
                 default:
                     break;
             }
-        })
+        });
     }
 
     Display()
@@ -241,6 +245,35 @@ class Form extends DataManipulator
         });
 
         return isCorrect;
+    }
+
+    GetQuestionByKey(key)
+    {
+        let result = null;
+
+        this.Questions.forEach(question => {
+            // log(question.Key === 'inventory');
+            if (result === null && question.Key === key)
+                result = question;
+        });
+
+        return result;
+    }
+
+    Edit(index)
+    {
+        this.Editing = eval(this.RawDataSource)[index];
+
+        Object.entries(this.Editing).forEach(entry => {
+            const [key, value] = entry;
+
+            let question = this.GetQuestionByKey(key);
+
+            if (!question)
+                return;
+            
+            log(question);
+        });
     }
 
 }

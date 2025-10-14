@@ -95,7 +95,7 @@
             </Column>
             <Column Type="Action">
                 <Title>Akcje</Title>
-                <Button Action="console.log">Edytuj</Button>
+                <Button Action="index => formManager.GetByName('creator').Edit(index)">Edytuj</Button>
                 <Button Action="console.log">Usuń</Button>
             </Column>
         </View>

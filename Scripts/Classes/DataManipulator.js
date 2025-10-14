@@ -20,7 +20,7 @@ class DataManipulator
         this.ID = null;
         this.XML = xml;
         this.HTML = null;
-        this.RawDataSource = { };
+        this.RawDataSource = null;
         this.DataSource = { };
 
         let dataType = xml.Attr("DataType");
