@@ -1,25 +1,25 @@
 
 
-class QuestionMultiSelect extends ComplexQuestion
+class QuestionMultiObject extends QuestionObject
 {
     constructor (xml)
     {
         super (xml);
     }
-    
+
     CreateHTML(obj)
     {
         this._SetBaseHTML(obj);
-
+        
         let select = Create("select");
         select.id = Form.GetCellID();
         select.multiple = true;
 
-        this.Answers.forEach(answer => {
-            
+        this.Answers.forEach((answer, index) => {
+
             let option = Create("option");
-            option.value = answer.Value;
-            option.innerHTML = answer.Content;
+            option.value = index;
+            option.innerHTML = answer[this.KeyLabel];
             select.appendChild(option);
 
         });
@@ -31,22 +31,26 @@ class QuestionMultiSelect extends ComplexQuestion
         this.Reset();
     }
 
+    _FillAnswers()
+    {
+        this.Answers = eval(this.XML.Attr("Source"));
+    }
+
     GetValue()
     {
         return this.GetSelectedValues(this.HTML);
     }
 
-    GetSelectedValues(mutliSelect)
+    GetSelectedValues(multiObject)
     {
         let result = [];
 
-        mutliSelect.forEach(option => {
+        multiObject.forEach(option => {
             switch (option.tagName.toLowerCase())
             {
                 case "option":
                     if (option.selected)
-                        result.push(option.value);
-
+                        result.push(this.Answers[option.value]);
                     break;
                 case "optgroup":
                     let innerOptions = this.GetSelectedValues(option);

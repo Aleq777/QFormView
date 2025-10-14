@@ -41,11 +41,11 @@
     <script type="text/javascript" src="./Scripts/Form/Questions/QuestionFile.js"></script>
     <script type="text/javascript" src="./Scripts/Form/Questions/QuestionMultiSelect.js"></script>
     <script type="text/javascript" src="./Scripts/Form/Questions/QuestionNumber.js"></script>
-    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionObjectMultiSelect.js"></script>
-    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionObjectSelect.js"></script>
     <script type="text/javascript" src="./Scripts/Form/Questions/QuestionRadio.js"></script>
     <script type="text/javascript" src="./Scripts/Form/Questions/QuestionRange.js"></script>
     <script type="text/javascript" src="./Scripts/Form/Questions/QuestionSelect.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionObject.js"></script>
+    <script type="text/javascript" src="./Scripts/Form/Questions/QuestionMultiObject.js"></script>
     
 
     <script type="text/javascript" src="./Scripts/Form/Form.js"></script>
@@ -169,6 +169,12 @@
             </Question>
             <Question Key="Accept" Type="Checkbox" Default="true" Required="true">
                 <Title>Akceptuję warunki taniej siły roboczej</Title>
+            </Question>
+            <Question Type="Object" Source="data.users" Key="identifier">
+                <Title>Wzorzec</Title>
+            </Question>
+            <Question Type="MultiObject" Source="data.users" Key="identifier">
+                <Title>Dzieci</Title>
             </Question>
             <!-- Independent -->
             <Actions>

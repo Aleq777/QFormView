@@ -129,12 +129,6 @@ class Form extends DataManipulator
             case EnumQuestionTypes.Number:
                 return new QuestionNumber(xml);
 
-            case EnumQuestionTypes.ObjectMultiSelect:
-                return new QuestionMultiSelect(xml);
-
-            case EnumQuestionTypes.ObjectSelect:
-                return new QuestionObjectSelect(xml);
-
             case EnumQuestionTypes.Paragraph:
                 return new QuestionParagraph(xml);
 
@@ -146,6 +140,12 @@ class Form extends DataManipulator
 
             case EnumQuestionTypes.Select:
                 return new QuestionSelect(xml);
+
+            case EnumQuestionTypes.Object:
+                return new QuestionObject(xml);
+
+            case EnumQuestionTypes.MultiObject:
+                return new QuestionMultiObject(xml);
 
             case EnumQuestionTypes.Text:
             default:
@@ -189,11 +189,13 @@ class Form extends DataManipulator
                 return new Action(title, () => {
                     this.Clear();
                 });
+                
             case EnumButtonTypes.Submit:
                 title ??= "Dodaj";
                 return new Action(title, () => {
                     this.Submit();
                 });
+
             case EnumButtonTypes.Action:
             default:
                 title ??= "Akcja";

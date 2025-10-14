@@ -8,8 +8,8 @@ const EnumQuestionTypes = {
     Checkbox: "Checkbox",
     Select: "Select",
     MultiSelect: "MultiSelect",
-    ObjectSelect: "ObjectSelect",
-    ObjectMultiSelect: "ObjectMultiSelect",
+    Object: "Object",
+    MultiObject: "MultiObject",
     Date: "Date",
     File: "File",
     Color: "Color",
@@ -106,7 +106,6 @@ class Question
             return true;
         
         // log(Question.ErrorMessages);
-        log(2);
 
         this.ShowBaseError(Question.ErrorMessages, Question.ErrorTypes.FieldRequired);
         return false;
@@ -159,5 +158,4 @@ class Question
     {
         this.ErrorCell.hidden = true;
     }
-
 }

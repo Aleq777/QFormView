@@ -7,9 +7,9 @@ class FormManager extends Manager
         super ();
     }
 
-    Start()
+    Start(htmlSourceID = "forms")
     {
-        super.Start("forms");
+        super.Start(htmlSourceID);
     }
 
     _InitializeInstances()

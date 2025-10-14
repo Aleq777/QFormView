@@ -7,9 +7,9 @@ class ViewManager extends Manager
         super ();
     }
     
-    Start()
+    Start(htmlSourceID = "views")
     {
-        super.Start("views");
+        super.Start(htmlSourceID);
     }
 
     _InitializeInstances()

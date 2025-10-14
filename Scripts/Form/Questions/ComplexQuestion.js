@@ -21,7 +21,10 @@ class ComplexQuestion extends Question
         super (xml);
 
         this.Answers = [];
-        this.Default = this.XML.FindTag("Answers").Attr("Default");
+
+        let answers = this.XML.FindTag("Answers");
+
+        this.Default = answers ? answers.Attr("Default") : null;
 
         this._FillAnswers();
     }
