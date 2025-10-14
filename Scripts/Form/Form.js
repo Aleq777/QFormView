@@ -192,14 +192,14 @@ class Form extends DataManipulator
                 title ??= "Resetuj";
                 return new Action(title, () => {
                     this.Clear();
-                });
+                }, "Reset");
                 
             case EnumButtonTypes.Submit:
                 title ??= "Dodaj";
                 return new Action(title, () => {
                     if (this.Check())
                         this.Submit();
-                });
+                }, "Submit");
 
             case EnumButtonTypes.Action:
             default:
@@ -208,7 +208,7 @@ class Form extends DataManipulator
                 return new Action(title, data => {
                     if (this.Check())
                         procedure(data);
-                });
+                }, "Action");
         }
     }
 
@@ -226,7 +226,7 @@ class Form extends DataManipulator
         this.DataSource.push(result);
 
         if (this.ConnectedView)
-            eval(this.ConnectedView).Reload();
+            viewManager.GetByName(this.ConnectedView).Reload();
     }
 
     Clear()
@@ -252,12 +252,25 @@ class Form extends DataManipulator
         let result = null;
 
         this.Questions.forEach(question => {
-            // log(question.Key === 'inventory');
             if (result === null && question.Key === key)
                 result = question;
         });
 
         return result;
+    }
+
+    GetActionByTag(tag)
+    {
+        let result = null;
+
+        this.Actions.forEach(action => {
+            if (result === null && action.Tag === tag)
+            {
+                result = action;
+            }
+        });
+
+        return action;
     }
 
     Edit(index)
@@ -272,7 +285,7 @@ class Form extends DataManipulator
             if (!question)
                 return;
             
-            log(question);
+            question.HTML.value = value;
         });
     }
 

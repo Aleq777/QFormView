@@ -9,10 +9,12 @@ class Action
 {
     Title;
     Procedure;
+    Tag;
 
-    constructor (title, procedure)
+    constructor (title, procedure, tag)
     {
         this.Title = title;
         this.Procedure = procedure;
+        this.Tag = tag;
     }
 }
