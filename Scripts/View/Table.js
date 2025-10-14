@@ -126,7 +126,7 @@ class Table extends DataManipulator
 
     _FillSingleData(table)
     {
-        const data = this.DataSources.Main;
+        const data = this.DataSource;
 
         data.forEach((item, index) => {
             let tr = Create("tr");
@@ -147,7 +147,7 @@ class Table extends DataManipulator
                 }
                 else if (column instanceof ColumnCustom)
                 {
-                    column.CreateCell(tr, item, this.RawDataSources.Main, index)
+                    column.CreateCell(tr, item, this.RawDataSource, index)
                 }
                 else if (column instanceof ColumnField)
                 {

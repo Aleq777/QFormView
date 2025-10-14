@@ -60,10 +60,7 @@
             <Description>
                 Przykładowa tabela z użytkownikami.
             </Description>
-            <Data>
-                <Source>data.users</Source>
-                <!-- <Source Alias="vehicle">data.vehicles</Source> -->
-            </Data>
+            <Data>data.users</Data>
             <Group Title="Grupa">
                 <Column Type="Counter" StartFrom="1">
                     <Title>lp.</Title>
@@ -86,9 +83,7 @@
                 <Title>Ekwipunek</Title>
                 <Each Using="$=inventory">
                     <Table>
-                        <Data>
-                            <Source>$</Source>
-                        </Data>
+                        <Data>$</Data>
                         <Column Type="Field" Key="label">
                             <Title>Przedmiot</Title>
                         </Column>
@@ -114,9 +109,7 @@
             <Description>
                 Skonfiguruj postać
             </Description>
-            <Data>
-                <Source>data.users</Source>
-            </Data>
+            <Data>data.users</Data>
             <Question Key="Name" Type="Text" Required="true">
                 <Title>Imię</Title>
             </Question>

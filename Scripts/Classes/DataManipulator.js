@@ -9,59 +9,36 @@ class DataManipulator
     // Reference to HTML (as DOM)
     HTML;
     // Raw identifiers before eval
-    RawDataSources;
+    RawDataSource;
     // Data sources after eval
-    DataSources;
+    DataSource;
 
     constructor (xml)
     {
         this.ID = null;
         this.XML = xml;
         this.HTML = null;
-        this.RawDataSources = { };
-        this.DataSources = { };
+        this.RawDataSource = { };
+        this.DataSource = { };
 
-        this._SetDataSources();
+        this._SetDataSource();
     }
 
-    _SetDataSources()
+    _SetDataSource()
     {
         const data = this.XML.FindTag("Data");
 
         if (!data)
             return;
 
-        const sources = data.GetTags("Source");
-
-        switch (sources.length)
-        {
-            case 0:
-
-                break;
-            case 1:
-                this._SetSingleSource(sources[0]);
-                break;
-            default:
-                sources.forEach(source => {
-                    this._SetSource(source)
-                });
-                break;
-        }
-    }
-
-    _SetSingleSource(source)
-    {
-        const value = source.innerHTML.trim();
-        this.RawDataSources.Main = value;
-        this.DataSources.Main = eval(value);
+        this._SetSource(data);
     }
 
     _SetSource(source)
     {
-        const alias = source.Attr("Alias");
         const value = source.innerHTML.trim();
-        this.RawDataSources[alias] = value;
-        this.DataSources[alias] = eval(value);
+        this.RawDataSource = value;
+        this.DataSource = eval(value);
     }
 
     // abstract
