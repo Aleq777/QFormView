@@ -79,11 +79,14 @@ class Table extends DataManipulator
     {
         this.HTML = sourceHTML.querySelector(`#${id}`);
 
+        // Reload
+        this.HTML.innerHTML = ``;
+
         this._CreateGroups();
 
         this._CreateColumns(this.Columns);
 
-        this._FillData();
+        this._FillSingleData(this.HTML);
     }
 
     _CreateGroups()
@@ -119,19 +122,6 @@ class Table extends DataManipulator
             th.innerHTML = column.Title;
             this.HTML.appendChild(th);
         });
-    }
-
-    _FillData()
-    {
-        // Dane są pojedyncze czy wielokrotne?
-        if (this.DataSources.Main)
-        {
-            this._FillSingleData(this.HTML);
-        }
-        else
-        {
-            // log(2);
-        }
     }
 
     _FillSingleData(table)
