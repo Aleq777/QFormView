@@ -35,4 +35,16 @@ class Manager
             t.Display();
         })
     }
+
+    GetByName(name)
+    {
+        let result = null;
+
+        this.Instances.forEach(item => {
+            if (result === null && item.Name === name)
+                result = item;
+        });
+
+        return result;
+    }
 }

@@ -126,9 +126,10 @@ class Table extends DataManipulator
 
     _FillSingleData(table)
     {
-        const data = this.DataSource;
+        const d = eval(this.RawDataSource);
+        log(d);
 
-        data.forEach((item, index) => {
+        d.forEach((item, index) => {
             let tr = Create("tr");
 
             this.SerializedColumns.forEach(column => {

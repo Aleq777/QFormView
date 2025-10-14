@@ -9,7 +9,7 @@ class QuestionObject extends QuestionSelect
     {
         super (xml);
 
-        this.KeyLabel = this.XML.Attr("Key");
+        this.KeyLabel = this.XML.Attr("KeyLabel");
     }
 
     CreateHTML(obj)

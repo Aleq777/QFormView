@@ -51,5 +51,19 @@ class QuestionRadio extends ComplexQuestion
                 value.checked = true;
         })
     }
+
+    GetValue()
+    {
+        let result = null;
+
+        Object.entries(this.HTML).forEach(entry => {
+            const [k, input] = entry;
+
+            if (result === null && input.checked)
+                result = input.value;
+        });
+
+        return result;
+    }
     
 }

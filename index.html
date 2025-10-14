@@ -56,7 +56,7 @@
     <script id="views" type="application/xml">
 
     <Views>
-        <View Name="users" Title="Użytkownicy" Type="Horizontal">
+        <View Name="users" Title="Użytkownicy" DataType="Column">
             <Description>
                 Przykładowa tabela z użytkownikami.
             </Description>
@@ -105,7 +105,7 @@
 
     <script id="forms" type="application/xml">
     <Forms>
-        <Form Name="creator" Title="Konfiguracja postaci" Editable="true">
+        <Form Name="creator" Title="Konfiguracja postaci" Editable="true" ConnectedView="viewManager.GetByName('users');">
             <Description>
                 Skonfiguruj postać
             </Description>
@@ -163,10 +163,10 @@
             <Question Key="Accept" Type="Checkbox" Default="true" Required="true">
                 <Title>Akceptuję warunki taniej siły roboczej</Title>
             </Question>
-            <Question Type="Object" Source="data.users" Key="identifier">
+            <Question Key="Template" Type="Object" Source="data.users" KeyLabel="identifier">
                 <Title>Wzorzec</Title>
             </Question>
-            <Question Type="MultiObject" Source="data.users" Key="identifier">
+            <Question Key="inventory" Type="MultiObject" Source="data.users" KeyLabel="identifier">
                 <Title>Dzieci</Title>
             </Question>
             <!-- Independent -->

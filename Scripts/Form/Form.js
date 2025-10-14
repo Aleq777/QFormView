@@ -21,6 +21,7 @@ class Form extends DataManipulator
 
     Questions;
     Actions;
+    ConnectedView;
 
     constructor (xml)
     {
@@ -33,6 +34,8 @@ class Form extends DataManipulator
 
         this.Questions = [];
         this.Actions = [];
+
+        this.ConnectedView = xml.Attr("ConnectedView");
 
         this._SetBasics();
 
@@ -155,11 +158,8 @@ class Form extends DataManipulator
 
     _FillForm()
     {
-
         this.Questions.forEach(question => {
             question.CreateHTML(this.HTML);
-            // let q = question.CreateHTML();
-            // this.HTML.appendChild(q);
         });
     }
 
@@ -193,14 +193,18 @@ class Form extends DataManipulator
             case EnumButtonTypes.Submit:
                 title ??= "Dodaj";
                 return new Action(title, () => {
-                    this.Submit();
+                    if (this.Check())
+                        this.Submit();
                 });
 
             case EnumButtonTypes.Action:
             default:
                 title ??= "Akcja";
                 procedure = eval(action.Attr("Action"));
-                return new Action(title, procedure);
+                return new Action(title, data => {
+                    if (this.Check())
+                        procedure(data);
+                });
         }
     }
 
@@ -208,6 +212,17 @@ class Form extends DataManipulator
     {
         if (!this.Check())
             return;
+
+        let result = { };
+
+        this.Questions.forEach(question => {
+            result[question.Key] = question.GetValue();
+        });
+
+        this.DataSource.push(result);
+
+        if (this.ConnectedView)
+            eval(this.ConnectedView).Reload();
     }
 
     Clear()

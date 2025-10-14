@@ -1,12 +1,11 @@
-var g;
+var formManager = null;
+var viewManager = null;
 
 function LoadQFormView()
 {
     // ViewManager.Start();
-    const formManager = new FormManager();
-    const viewManager = new ViewManager();
-
-    g = formManager;
+    viewManager = new ViewManager();
+    formManager = new FormManager();
     
     formManager.Start();
     viewManager.Start();

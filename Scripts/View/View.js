@@ -26,6 +26,11 @@ class View extends Table
     {
         this._InitialiseHTML();
 
+        this.Reload();
+    }
+
+    Reload()
+    {
         super.Display(
             View.GetIDFromName(this.Name),
             document

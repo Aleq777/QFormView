@@ -12,6 +12,8 @@ class DataManipulator
     RawDataSource;
     // Data sources after eval
     DataSource;
+    // Data Type (for new() operator)
+    DataType;
 
     constructor (xml)
     {
@@ -20,6 +22,9 @@ class DataManipulator
         this.HTML = null;
         this.RawDataSource = { };
         this.DataSource = { };
+
+        let dataType = xml.Attr("DataType");
+        this.DataType = dataType ? eval(dataType) : null;
 
         this._SetDataSource();
     }
