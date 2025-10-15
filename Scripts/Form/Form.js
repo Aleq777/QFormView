@@ -99,7 +99,7 @@ class Form extends DataManipulator
             button.type = "button";
             button.innerHTML = item.Title;
             button.onclick = () => {
-                item.Procedure(this);
+                item.Procedure(this.Name, this);
             };
 
             Find(this.Name).FindTag("fieldset").appendChild(button);
@@ -191,26 +191,39 @@ class Form extends DataManipulator
         {
             case EnumButtonTypes.Clear:
                 title ??= "Resetuj";
-                return new Action(title, function () {
-                    formInstance.Clear();
-                }, "Reset");
+                return new Action(
+                    action,
+                    "Reset"
+                );
+                // return new Action(title, function () {
+                //     formInstance.Clear();
+                // }, "Reset");
                 
             case EnumButtonTypes.Submit:
                 title ??= "Dodaj";
-                return new Action(title, function () {
-                    if (formInstance.Check())
-                        formInstance.Submit();
-                }, "Submit");
+                return new Action(
+                    action,
+                    "Submit"
+                );
+                // return new Action(title, function () {
+                //     if (formInstance.Check())
+                //         formInstance.Submit();
+                // }, "Submit");
 
             case EnumButtonTypes.Action:
             default:
                 title ??= "Akcja";
                 procedure = eval(action.Attr("Action"));
-                return new Action(title, function (data) {
-                    if (formInstance.Check())
-                        procedure(data)
 
-                }, "Action");
+                return new Action(
+                    action,
+                    "Akcja"
+                );
+                // return new Action(title, function (data) {
+                //     if (formInstance.Check())
+                //         procedure(data)
+
+                // }, "Action");
         }
     }
 
