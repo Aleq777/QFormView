@@ -1,50 +1,23 @@
-<Views>
-    <View Name="users" Title="Użytkownicy" Type="Horizontal">
-        <Description>
-            Przykładowa tabela z użytkownikami.
-        </Description>
-        <Data>
-            <Source>data.users</Source>
-            <!-- <Source Alias="vehicle">data.vehicles</Source> -->
-        </Data>
-        <Group Title="Grupa">
-            <Column Type="Counter" StartFrom="1">
-                <Title>lp.</Title>
-            </Column>
-            <Column Type="Active">
-                <Title>X</Title>
-            </Column>
-        </Group>
-        <Column Type="Field" Key="identifier">
-            
-        </Column>
-        <Column Type="Custom">
-            <Title>Imię i nazwisko</Title>
-            <!-- HardSpaces = false (domyślnie) powoduje ignorowanie spacji jeśli są -->
-            <Each Using="$ = firstname, @ = lastname" HardSpaces="false">
-                $ @
-            </Each>
-        </Column>
-        <Column Type="Custom">
-            <Title>Ekwipunek</Title>
-            <Each Using="$=inventory">
-                <Table>
-                    <Data>
-                        <Source>$</Source>
-                    </Data>
-                    <Column Type="Field" Key="label">
-                        <Title>Przedmiot</Title>
-                    </Column>
-                    <Column Type="Field" Key="count">
-                        <Title>Ilość</Title>
-                    </Column>
-                </Table>
-            </Each>
-        </Column>
-        <Column Type="Action">
-            <Title>Akcje</Title>
-            <Button Action="console.log">Edytuj</Button>
-            <Button Action="console.log">Usuń</Button>
-        </Column>
-    </View>
-</Views>
+<Form Name="creator" Title="Konfiguracja postaci" ConnectedView="users">
+    <Description>
+        Skonfiguruj postać
+    </Description>
+    <Data>data.users</Data>
+    <Question Key="identifier" Type="Text" Required="true">
+        <Title>Identifier</Title>
+    </Question>
+    <Question Key="firstname" Type="Text" Required="true">
+        <Title>Imię</Title>
+    </Question>
+    <Question Key="lastname" Type="Text" Required="true">
+        <Title>Nazwisko</Title>
+    </Question>
+    <Question Key="inventory" Type="MultiObject">
+        <Title>Ekwipunek</Title>
+    </Question>
+    <Actions>
+        <Button Type="Clear"/>
+        <Button Action="log">Sprawdź</Button>
+        <Button Type="Submit" Editing="Edytuj">Dodaj</Button>
+    </Actions>
+</Form>

@@ -85,6 +85,8 @@ class Form extends DataManipulator
         this._InitialiseButtons();
 
         this._FillForm();
+
+        this._ToggleEdit();
     }
 
     _InitialiseHTML()
@@ -99,10 +101,12 @@ class Form extends DataManipulator
             button.type = "button";
             button.innerHTML = item.Title;
             button.onclick = () => {
-                item.Procedure(this);
+                item.Procedure(this.Name, this);
             };
 
             Find(this.Name).FindTag("fieldset").appendChild(button);
+
+            item.SetHTML(button);
         });
     }
 
@@ -185,30 +189,45 @@ class Form extends DataManipulator
         let title = action.Attr("Title");
         let procedure;
         const type = action.Attr("Type");
+        const formInstance = this;
 
         switch (type)
         {
             case EnumButtonTypes.Clear:
                 title ??= "Resetuj";
-                return new Action(title, () => {
-                    this.Clear();
-                });
+                return new Action(
+                    action,
+                    "Reset"
+                );
+                // return new Action(title, function () {
+                //     formInstance.Clear();
+                // }, "Reset");
                 
             case EnumButtonTypes.Submit:
                 title ??= "Dodaj";
-                return new Action(title, () => {
-                    if (this.Check())
-                        this.Submit();
-                });
+                return new Action(
+                    action,
+                    "Submit"
+                );
+                // return new Action(title, function () {
+                //     if (formInstance.Check())
+                //         formInstance.Submit();
+                // }, "Submit");
 
             case EnumButtonTypes.Action:
             default:
                 title ??= "Akcja";
                 procedure = eval(action.Attr("Action"));
-                return new Action(title, data => {
-                    if (this.Check())
-                        procedure(data);
-                });
+
+                return new Action(
+                    action,
+                    "Akcja"
+                );
+                // return new Action(title, function (data) {
+                //     if (formInstance.Check())
+                //         procedure(data)
+
+                // }, "Action");
         }
     }
 
@@ -223,10 +242,10 @@ class Form extends DataManipulator
             result[question.Key] = question.GetValue();
         });
 
-        this.DataSource.push(result);
+        eval(this.RawDataSource).push(result);
 
         if (this.ConnectedView)
-            eval(this.ConnectedView).Reload();
+            viewManager.GetByName(this.ConnectedView).Reload();
     }
 
     Clear()
@@ -252,7 +271,6 @@ class Form extends DataManipulator
         let result = null;
 
         this.Questions.forEach(question => {
-            // log(question.Key === 'inventory');
             if (result === null && question.Key === key)
                 result = question;
         });
@@ -260,9 +278,27 @@ class Form extends DataManipulator
         return result;
     }
 
+    GetActionByType(type)
+    {
+        let result = null;
+
+        this.Actions.forEach(action => {
+            if (result === null && action.Type === type)
+            {
+                result = action;
+            }
+        });
+
+        return result;
+    }
+
     Edit(index)
     {
-        this.Editing = eval(this.RawDataSource)[index];
+        // Cannot change edited object
+        if (this.Editing)
+            return;
+
+        this._StartEditing(eval(this.RawDataSource)[index]);
 
         Object.entries(this.Editing).forEach(entry => {
             const [key, value] = entry;
@@ -272,8 +308,98 @@ class Form extends DataManipulator
             if (!question)
                 return;
             
-            log(question);
+            question.HTML.value = value;
         });
+    }
+
+    
+    _StartEditing(editedObject)
+    {
+        this._ToggleEdit(editedObject);
+    }
+    
+    _FinishEditing()
+    {
+        this._ToggleEdit(null);
+        this.Clear();
+    }
+
+    _ToggleEdit(editedObject)
+    {
+        this.Editing = editedObject;
+        const isEditing = editedObject != null;
+
+        this.GetActionByType(EnumButtonTypes.Submit).HTML.hidden = isEditing;
+        this.GetActionByType(EnumButtonTypes.Confirm).HTML.hidden = !isEditing;
+        this.GetActionByType(EnumButtonTypes.Cancel).HTML.hidden = !isEditing;
+    }
+
+    Confirm()
+    {
+        const index = eval(this.RawDataSource).indexOf(this.Editing);
+
+        if (!this.Check())
+            return;
+
+        // in case if the data is deleted - submit it as new
+        if (index === -1)
+        {
+            this.Submit();
+            return;
+        }
+
+        let result = { };
+        let usedKeys = [];
+
+        this.Questions.forEach(question => {
+            result[question.Key] = question.GetValue();
+            usedKeys.push(question.Key);
+        });
+
+        const unused = Object.entries(this.Editing).filter(param => {
+            const [key, value] = param;
+            return usedKeys.indexOf(key) === -1
+        });
+
+        unused.forEach(entry => {
+            const [key, value] = entry;
+            log(key);
+            result[key] = this.Editing[key];
+            // result[item] = this.Editing[item];
+        });
+
+        // const a = this.Questions.filter(value => usedKeys.indexOf(value.Key) === -1);
+        // this.Questions.forEach(question => {
+        //     log(question.Key);
+        // });
+        // log(a);
+
+        // Object.entries(this.Editing).forEach(entry => {
+        //     const [key, value] = entry;
+
+        //     const a = this.Questions.filter(value => usedKeys.indexOf(value) !== -1);
+        //     log(a);
+        //     // this.Questions.forEach(question => {
+        //     //     if (question.Key === key)
+        //     //         return;
+        //     //     log(key);
+        //     //     result[key] = this.Editing[key];
+        //     // });
+        // });
+
+
+        eval(this.RawDataSource)[index] = result;
+
+        if (this.ConnectedView)
+            viewManager.GetByName(this.ConnectedView).Reload();
+        
+
+        this._FinishEditing();
+    }
+
+    Cancel()
+    {
+        this._FinishEditing();
     }
 
 }

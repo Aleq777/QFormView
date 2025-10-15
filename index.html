@@ -52,6 +52,7 @@
     <script type="text/javascript" src="./Scripts/Form/FormManager.js"></script>
     
     <script type="text/javascript" src="./Scripts/main.js"></script>
+    <script type="text/javascript" src="./functions.js"></script>
 
     <script id="views" type="application/xml">
 
@@ -95,7 +96,7 @@
             </Column>
             <Column Type="Action">
                 <Title>Akcje</Title>
-                <Button Action="index => formManager.GetByName('creator').Edit(index)">Edytuj</Button>
+                <Button Action="EditViewRecordInForm">Edytuj</Button>
                 <Button Action="console.log">Usuń</Button>
             </Column>
         </View>
@@ -105,75 +106,27 @@
 
     <script id="forms" type="application/xml">
     <Forms>
-        <Form Name="creator" Title="Konfiguracja postaci" Editable="true" ConnectedView="viewManager.GetByName('users');">
+
+        <Form Name="creator" Title="Konfiguracja postaci" ConnectedView="users">
             <Description>
                 Skonfiguruj postać
             </Description>
             <Data>data.users</Data>
-            <Question Key="Name" Type="Text" Required="true">
+            <Question Key="identifier" Type="Text" Required="true">
+                <Title>Identifier</Title>
+            </Question>
+            <Question Key="firstname" Type="Text" Required="true">
                 <Title>Imię</Title>
             </Question>
-            <Question Key="LastName" Type="Text" Required="true">
+            <Question Key="lastname" Type="Text" Required="true">
                 <Title>Nazwisko</Title>
             </Question>
-            <Question Key="Height" Type="Range" Min="160" Max="200" Step="0.1">
-                <Title>Wzrost</Title>
-            </Question>
-            <Question Key="Sex" Type="Radio" Required="true">
-                <Description>Biologiczna płeć</Description>
-                <Title>Płeć</Title>
-                <Answers Default="m">
-                    <Answer Value="m">Mężczyzna</Answer>
-                    <Answer Value="k">
-                        <span style="color:#f00;">Kobieta</span>
-                    </Answer>
-                </Answers>
-            </Question>
-            <Question Key="Job" Type="Select" Placeholder="Aa..." Required="true">
-                <Title>Praca</Title>
-                <Answers>
-                    <Answer Value="police">Policjant</Answer>
-                    <Answer Value="mecano">Mechanik</Answer>
-                    <Answer Value="ems">Medyk</Answer>
-                </Answers>
-            </Question>
-            <Question Key="Country" Type="MultiSelect" Placeholder="Aa..." Required="true">
-                <Title>Obywatelstwo</Title>
-                <Answers Order="Descending">
-                    <Answer Value="pl">Polskie</Answer>
-                    <Answer Value="us">Amerykańskie</Answer>
-                    <Answer Value="fr">Francuskie</Answer>
-                    <Answer Value="en">Brytyjskie</Answer>
-                    <Answer Value="sp">Hiszpańskie</Answer>
-                    <Answer Value="ch">Chińskie</Answer>
-                </Answers>
-            </Question>
-            <Question Key="DateOfBirth" Type="Date" Required="true">
-                <Title>Data urodzenia</Title>
-            </Question>
-            <Question Key="FavColor" Type="Color" Default="#ff0000" Required="true">
-                <Title>Ulubiony kolor</Title>
-            </Question>
-            <Question Key="History" Type="Paragraph" MinLength="1" Required="true">
-                <Title>Historia postaci</Title>
-            </Question>
-            <Question Key="Photo" Type="File" Required="true">
-                <Title>Zdjęcie</Title>
-            </Question>
-            <Question Key="Accept" Type="Checkbox" Default="true" Required="true">
-                <Title>Akceptuję warunki taniej siły roboczej</Title>
-            </Question>
-            <Question Key="Template" Type="Object" Source="data.users" KeyLabel="identifier">
-                <Title>Wzorzec</Title>
-            </Question>
-            <Question Key="inventory" Type="MultiObject" Source="data.users" KeyLabel="identifier">
-                <Title>Dzieci</Title>
-            </Question>
-            <!-- Independent -->
             <Actions>
-                <Button Type="Clear"></Button>
+                <Button Type="Clear"/>
                 <Button Action="log">Sprawdź</Button>
                 <Button Type="Submit">Dodaj</Button>
+                <Button Type="Confirm">Potwierdź</Button>
+                <Button Type="Cancel">Anuluj</Button>
             </Actions>
         </Form>
     </Forms>

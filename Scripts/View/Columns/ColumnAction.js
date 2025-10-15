@@ -19,11 +19,13 @@ class ColumnAction extends Column
 
                 let button = Create("button");
                 button.innerText = action.Title;
-                button.onclick = () => {
+                button.onclick = function () {
                     action.Procedure(index, item);
                 };
 
                 cell.appendChild(button);
+
+                action.SetHTML(button);
                 
             });
         });
@@ -32,9 +34,9 @@ class ColumnAction extends Column
     _SetActions(xml)
     {
         xml.GetTags("Button").forEach(button => {
+
             const action = new Action(
-                button.textContent.trim(),
-                eval(button.Attr("Action"))
+                button
             );
 
             this.Actions.push(action);
