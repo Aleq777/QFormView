@@ -4,7 +4,7 @@ const EnumButtonTypes = {
     Submit: "Submit",
     Clear: "Clear",
     Confirm: "Confirm",
-    Clear: "Clear"
+    Cancel: "Cancel"
 };
 
 const EnumDefaultActions = {
@@ -20,11 +20,14 @@ const EnumDefaultActions = {
     },
 
     Confirm: function (index, item) {
+        const mgr = formManager.GetByName(index);
 
+        if (mgr.Check())
+            mgr.Confirm();
     },
 
     Cancel: function (index, item) {
-
+        formManager.GetByName(index).Cancel();
     }
 };
 
