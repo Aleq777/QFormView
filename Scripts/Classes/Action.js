@@ -46,12 +46,19 @@ class Action
 
         let action = xml.Attr("Action") ?? EnumDefaultActions[this.Type];
         
+        // log(xml.Attr("Action"));
         this.Procedure = function (index, item)
         {
-            // log(action);
+            // log(index);
+            // log((eval(action))(index, item));
             ( eval(action) )(index, item);
         }
 
         this.HTML = null;
+    }
+
+    SetHTML(html)
+    {
+        this.HTML = html;
     }
 }

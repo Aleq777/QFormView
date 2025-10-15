@@ -24,6 +24,8 @@ class ColumnAction extends Column
                 };
 
                 cell.appendChild(button);
+
+                action.SetHTML(button);
                 
             });
         });

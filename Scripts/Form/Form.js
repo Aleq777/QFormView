@@ -103,6 +103,8 @@ class Form extends DataManipulator
             };
 
             Find(this.Name).FindTag("fieldset").appendChild(button);
+
+            item.SetHTML(button);
         });
     }
 
@@ -274,12 +276,12 @@ class Form extends DataManipulator
         return result;
     }
 
-    GetActionByTag(tag)
+    GetActionByType(type)
     {
         let result = null;
 
         this.Actions.forEach(action => {
-            if (result === null && action.Tag === tag)
+            if (result === null && action.Type === type)
             {
                 result = action;
             }
@@ -290,7 +292,7 @@ class Form extends DataManipulator
 
     Edit(index)
     {
-        this.Editing = eval(this.RawDataSource)[index];
+        this._StartEditing(eval(this.RawDataSource)[index]);
 
         Object.entries(this.Editing).forEach(entry => {
             const [key, value] = entry;
@@ -302,6 +304,27 @@ class Form extends DataManipulator
             
             question.HTML.value = value;
         });
+    }
+
+    
+    _StartEditing(editedObject)
+    {
+        this._ToggleEdit(editedObject);
+    }
+    
+    _FinishEditing()
+    {
+        this._ToggleEdit(null);
+    }
+
+    _ToggleEdit(editedObject)
+    {
+        this.Editing = editedObject;
+        const isEditing = editedObject != null;
+
+        this.GetActionByType(EnumButtonTypes.Submit).HTML.hidden = !isEditing;
+        this.GetActionByType(EnumButtonTypes.Confirm).HTML.hidden = isEditing;
+        this.GetActionByType(EnumButtonTypes.Cancel).HTML.hidden = isEditing;
     }
 
 }
