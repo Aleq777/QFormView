@@ -10,11 +10,13 @@ class Action
     Title;
     Procedure;
     Tag;
+    HTML;
 
     constructor (title, procedure, tag)
     {
         this.Title = title;
         this.Procedure = procedure;
         this.Tag = tag;
+        this.HTML = null;
     }
 }

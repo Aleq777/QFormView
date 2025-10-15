@@ -185,29 +185,31 @@ class Form extends DataManipulator
         let title = action.Attr("Title");
         let procedure;
         const type = action.Attr("Type");
+        const formInstance = this;
 
         switch (type)
         {
             case EnumButtonTypes.Clear:
                 title ??= "Resetuj";
-                return new Action(title, () => {
-                    this.Clear();
+                return new Action(title, function () {
+                    formInstance.Clear();
                 }, "Reset");
                 
             case EnumButtonTypes.Submit:
                 title ??= "Dodaj";
-                return new Action(title, () => {
-                    if (this.Check())
-                        this.Submit();
+                return new Action(title, function () {
+                    if (formInstance.Check())
+                        formInstance.Submit();
                 }, "Submit");
 
             case EnumButtonTypes.Action:
             default:
                 title ??= "Akcja";
                 procedure = eval(action.Attr("Action"));
-                return new Action(title, data => {
-                    if (this.Check())
-                        procedure(data);
+                return new Action(title, function (data) {
+                    if (formInstance.Check())
+                        procedure(data)
+
                 }, "Action");
         }
     }

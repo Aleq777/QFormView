@@ -126,6 +126,7 @@ class Table extends DataManipulator
 
     _FillSingleData(table)
     {
+        log(eval(this.RawDataSource))
         const d = eval(this.RawDataSource);
 
         d.forEach((item, index) => {

@@ -52,6 +52,7 @@
     <script type="text/javascript" src="./Scripts/Form/FormManager.js"></script>
     
     <script type="text/javascript" src="./Scripts/main.js"></script>
+    <script type="text/javascript" src="./functions.js"></script>
 
     <script id="views" type="application/xml">
 
@@ -95,7 +96,7 @@
             </Column>
             <Column Type="Action">
                 <Title>Akcje</Title>
-                <Button Action="index => formManager.GetByName('creator').Edit(index)">Edytuj</Button>
+                <Button Action="EditViewRecordInForm">Edytuj</Button>
                 <Button Action="console.log">Usuń</Button>
             </Column>
         </View>
@@ -120,10 +121,15 @@
             <Question Key="lastname" Type="Text" Required="true">
                 <Title>Nazwisko</Title>
             </Question>
+            <Question Key="inventory" Type="MultiObject" Source="[]">
+                <Title>Ekwipunek</Title>
+            </Question>
             <Actions>
                 <Button Type="Clear"/>
                 <Button Action="log">Sprawdź</Button>
-                <Button Type="Submit" Editing="Edytuj">Dodaj</Button>
+                <Button Type="Submit">Dodaj</Button>
+                <Button Type="Confirm">Potwierdź</Button>
+                <Button Type="Cancel">Anuluj</Button>
             </Actions>
         </Form>
     </Forms>
