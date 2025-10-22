@@ -17,7 +17,7 @@ class Column
         this.XML = xml;
         
         let title = xml.FindTag("Title");
-        this.Title = title ? title.innerHTML.trim() : this.Type;
+        this.Title = title ? title.innerHTML.trim() : "Column";
     }
 
     static _CreateCell(tr, func)

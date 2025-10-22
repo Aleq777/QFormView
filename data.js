@@ -59,3 +59,11 @@ const data = {
     }
   ]
 }
+
+
+const Profiles = [
+    {
+        Name: "elec",
+        Color: "#ff0000"
+    }
+];

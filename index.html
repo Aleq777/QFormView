@@ -57,6 +57,26 @@
     <script id="views" type="application/xml">
 
     <Views>
+        <View Name="Profiles" Title="Lista profili">
+            <Data>Profiles</Data>
+            <Column Type="Counter">
+                <Title>Lp.</Title>
+            </Column>
+            <Column Type="Custom">
+                <Title>Nazwa</Title>
+                <Each Using="$=Name,@=Color">
+                    <div style="background-color:@;">$</div>
+                </Each>
+            </Column>
+            <Column Type="Action">
+                <Title>Akcje</Title>
+                <Button Type="Edit"/>
+                <Button Type="Remove"/>
+                <!-- <Button Action="">Edytuj</Button>
+                <Button Action="">Usuń</Button> -->
+            </Column>
+        </View>
+
         <View Name="users" Title="Użytkownicy" DataType="Column">
             <Description>
                 Przykładowa tabela z użytkownikami.
@@ -96,8 +116,10 @@
             </Column>
             <Column Type="Action">
                 <Title>Akcje</Title>
-                <Button Action="EditViewRecordInForm">Edytuj</Button>
-                <Button Action="console.log">Usuń</Button>
+                <!-- <Button Action="EditViewRecordInForm">Edytuj</Button>
+                <Button Action="console.log">Usuń</Button> -->
+                <Button Action="">Edytuj</Button>
+                <Button Action="">Usuń</Button>
             </Column>
         </View>
     </Views>
@@ -106,7 +128,20 @@
 
     <script id="forms" type="application/xml">
     <Forms>
-
+        <Form Name="ProfilesCreator" Title="Konfiguracja profili" ConnectedView="Profiles">
+            <Data>Profiles</Data>
+            <Question Key="Name">
+                <Title>Nazwa</Title>
+            </Question>
+            <Question Key="Color" Type="Color" Default="#ffffff">
+                <Title>Kolor</Title>
+            </Question>
+            <Actions>
+                <Button Type="Submit"/>
+                <Button Type="Confirm"/>
+                <Button Type="Cancel"/>
+            </Actions>
+        </Form>
         <Form Name="creator" Title="Konfiguracja postaci" ConnectedView="users">
             <Description>
                 Skonfiguruj postać
@@ -144,6 +179,8 @@
     </style>
 </head>
 <body onload="LoadQFormView();">
+    <div id="Profiles"></div>
+    <div id="ProfilesCreator"></div>
     <div id="creator"></div>
     <div id="users"></div>
 </body>

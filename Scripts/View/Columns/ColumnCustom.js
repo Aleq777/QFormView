@@ -22,13 +22,16 @@ class ColumnCustom extends Column
     _SetAliases(xml)
     {
         const each = xml.FindTag("Each");
-        const prompt = each.Attr("Using");
+        const prompt = each.Attr("Using")?.trim();
         const hardSpaces = each.Attr("HardSpaces") === "true";
         let result = { };
 
         let key = "",
             value = "";
         let afterSetter = false;
+
+        if (!prompt)
+            return;
 
         for (let i = 0; i < prompt.length; i++)
         {

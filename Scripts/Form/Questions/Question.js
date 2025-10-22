@@ -47,7 +47,7 @@ class Question
     {
         this.XML = xml;
         this.HTML = null;
-        this.Title = xml.FindTag("Title").innerHTML;
+        this.Title = xml.FindTag("Title")?.innerHTML;
         this.Description = xml.FindTag("Description")?.innerHTML;
         this.IsRequired = xml.Attr("Required") == "true";
         this.Key = xml.Attr("Key");
@@ -105,8 +105,6 @@ class Question
         if (result)
             return true;
         
-        // log(Question.ErrorMessages);
-
         this.ShowBaseError(Question.ErrorMessages, Question.ErrorTypes.FieldRequired);
         return false;
     }
@@ -120,8 +118,6 @@ class Question
     ShowBaseError(errorFeed, errorType, data)
     {
         let errorMsg;
-
-        // log(errorType);
 
         switch (errorType)
         {

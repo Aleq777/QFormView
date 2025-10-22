@@ -329,9 +329,17 @@ class Form extends DataManipulator
         this.Editing = editedObject;
         const isEditing = editedObject != null;
 
-        this.GetActionByType(EnumButtonTypes.Submit).HTML.hidden = isEditing;
-        this.GetActionByType(EnumButtonTypes.Confirm).HTML.hidden = !isEditing;
-        this.GetActionByType(EnumButtonTypes.Cancel).HTML.hidden = !isEditing;
+        const submit = this.GetActionByType(EnumButtonTypes.Submit);
+        if (submit)
+            submit.HTML.hidden = isEditing;
+
+        const confirm = this.GetActionByType(EnumButtonTypes.Confirm);
+        if (confirm)
+            confirm.HTML.hidden = !isEditing;
+
+        const cancel = this.GetActionByType(EnumButtonTypes.Cancel);
+        if (cancel)
+            cancel.HTML.hidden = !isEditing;
     }
 
     Confirm()
@@ -363,30 +371,9 @@ class Form extends DataManipulator
 
         unused.forEach(entry => {
             const [key, value] = entry;
-            log(key);
             result[key] = this.Editing[key];
             // result[item] = this.Editing[item];
         });
-
-        // const a = this.Questions.filter(value => usedKeys.indexOf(value.Key) === -1);
-        // this.Questions.forEach(question => {
-        //     log(question.Key);
-        // });
-        // log(a);
-
-        // Object.entries(this.Editing).forEach(entry => {
-        //     const [key, value] = entry;
-
-        //     const a = this.Questions.filter(value => usedKeys.indexOf(value) !== -1);
-        //     log(a);
-        //     // this.Questions.forEach(question => {
-        //     //     if (question.Key === key)
-        //     //         return;
-        //     //     log(key);
-        //     //     result[key] = this.Editing[key];
-        //     // });
-        // });
-
 
         eval(this.RawDataSource)[index] = result;
 

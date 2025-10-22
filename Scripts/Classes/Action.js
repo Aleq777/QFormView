@@ -4,7 +4,10 @@ const EnumButtonTypes = {
     Submit: "Submit",
     Clear: "Clear",
     Confirm: "Confirm",
-    Cancel: "Cancel"
+    Cancel: "Cancel",
+
+    Edit: "Edit",
+    Remove: "Remove"
 };
 
 const EnumDefaultActions = {
@@ -28,6 +31,16 @@ const EnumDefaultActions = {
 
     Cancel: function (index, item) {
         formManager.GetByName(index).Cancel();
+    },
+
+    Edit: function (index, item) {
+        log(index)
+        log(item)
+        // formManager.GetByName(index).Edit()
+    },
+
+    Remove: function (index, item) {
+
     }
 };
 
@@ -49,11 +62,8 @@ class Action
 
         let action = xml.Attr("Action") ?? EnumDefaultActions[this.Type];
         
-        // log(xml.Attr("Action"));
         this.Procedure = function (index, item)
         {
-            // log(index);
-            // log((eval(action))(index, item));
             ( eval(action) )(index, item);
         }
 
