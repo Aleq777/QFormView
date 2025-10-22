@@ -67,3 +67,12 @@ const Profiles = [
         Color: "#ff0000"
     }
 ];
+
+const Items = [
+    {
+        Name: "Money",
+        Cost: "150",
+        IncomeFrequency: 2,
+        IncomeValue: 100
+    }
+];

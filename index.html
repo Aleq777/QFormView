@@ -77,6 +77,22 @@
             </Column>
         </View>
 
+        <View Name="Items" Title="Przedmioty">
+            <Data>Items</Data>
+            <Column Key="Name">
+
+            </Column>
+            <Column Key="Cost">
+
+            </Column>
+            <Column Key="IncomeFrequency">
+
+            </Column>
+            <Column Key="IncomeValue">
+
+            </Column>
+        </View>
+
         <View Name="users" Title="Użytkownicy" DataType="Column">
             <Description>
                 Przykładowa tabela z użytkownikami.
@@ -128,6 +144,7 @@
 
     <script id="forms" type="application/xml">
     <Forms>
+
         <Form Name="ProfilesCreator" Title="Konfiguracja profili" ConnectedView="Profiles">
             <Data>Profiles</Data>
             <Question Key="Name">
@@ -142,6 +159,29 @@
                 <Button Type="Cancel"/>
             </Actions>
         </Form>
+
+        <Form Name="ItemsCreator" Title="Konfigurator przedmiotów">
+            <Data>Items</Data>
+            <Actions>
+                <Button Type="Submit"></Button>
+                <Button Type="Cancel"/>
+                <Button Type="Confirm"/>
+            </Actions>
+            <Question Key="Name">
+                <Title>Nazwa</Title>
+            </Question>
+            <Question Key="Cost" Type="Number" Step="1">
+                <Title>Koszt</Title>
+            </Question>
+            <Question Key="IncomeFrequency" Type="Number" Step="1" Min="1">
+                <Title>Częstotliwość</Title>
+            </Question>
+            <Question Key="IncomeValue" Type="Number" Step="1">
+                <Title>Wartość</Title>
+            </Question>
+            
+        </Form>
+
         <Form Name="creator" Title="Konfiguracja postaci" ConnectedView="users">
             <Description>
                 Skonfiguruj postać
@@ -181,6 +221,8 @@
 <body onload="LoadQFormView();">
     <div id="Profiles"></div>
     <div id="ProfilesCreator"></div>
+    <div id="Items"></div>
+    <div id="ItemsCreator"></div>
     <div id="creator"></div>
     <div id="users"></div>
 </body>
