@@ -18,6 +18,7 @@ class ColumnAction extends Column
             this.Actions.forEach(action => {
 
                 let button = Create("button");
+                button.type = "button";
                 button.innerText = action.Title;
                 button.onclick = function () {
                     action.Procedure(index, item);

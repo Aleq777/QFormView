@@ -11,6 +11,7 @@ const EnumButtonTypes = {
 };
 
 const EnumDefaultActions = {
+    // Form
     Submit: function (index, item) {
         const mgr = formManager.GetByName(index);
 
@@ -32,16 +33,6 @@ const EnumDefaultActions = {
     Cancel: function (index, item) {
         formManager.GetByName(index).Cancel();
     },
-
-    Edit: function (index, item) {
-        log(index)
-        log(item)
-        // formManager.GetByName(index).Edit()
-    },
-
-    Remove: function (index, item) {
-
-    }
 };
 
 class Action
@@ -64,6 +55,7 @@ class Action
         
         this.Procedure = function (index, item)
         {
+            log(eval(action));
             ( eval(action) )(index, item);
         }
 

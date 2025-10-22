@@ -212,5 +212,4 @@ class Table extends DataManipulator
             return content;
         }
     }
-
 }

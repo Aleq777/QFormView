@@ -70,8 +70,8 @@
             </Column>
             <Column Type="Action">
                 <Title>Akcje</Title>
-                <Button Type="Edit"/>
-                <Button Type="Remove"/>
+                <Button Action="(function (index) {formManager.GetByName('ProfilesCreator').Edit(index);})">Edytuj</Button>
+                <Button Action="(function (index) {viewManager.GetByName('Profiles').Remove(index)})">Usuń</Button>
                 <!-- <Button Action="">Edytuj</Button>
                 <Button Action="">Usuń</Button> -->
             </Column>

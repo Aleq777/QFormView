@@ -47,4 +47,10 @@ class View extends Table
         return `${name}View`;
     }
 
+    Remove(index)
+    {
+        delete eval(this.RawDataSource)[index];
+        this.Reload();
+    }
+
 }
