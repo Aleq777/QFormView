@@ -50,6 +50,9 @@ class QuestionNumber extends Question
 
         const value = this.HTML.value;
 
+        if (value.length === 0)
+            return this.HideErrors();
+
         const min = this.Min ?? value;
 
         if (value < min)
